@@ -8,8 +8,8 @@
 <body>
 <?php
 # Connect to MySQL server and the database
-require( 'includes/connect_db.php' ) ;
-
+require( 'includes/connect_limbo_db.php' ) ;
+I really like buttholes
 # Includes these helper functions
 require( 'includes/limbohelpers.php' ) ;
 
