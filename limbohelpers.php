@@ -107,7 +107,7 @@ function show_lost_records($dbc) {
 		# Connect to MySQL server and the database
 		require( 'includes/connect_limbo_db.php' ) ;
 		# Create a query to get all fields from loststuff
-		$query = 'SELECT item_name, location_name, lost_date FROM loststuff';
+		$query = 'SELECT id, item_name, description, location_name, lost_date, owner_name, phone_number, status FROM loststuff';
 		# Execute the query
 		$results = mysqli_query( $dbc , $query ) ;
 		# Show results
@@ -118,9 +118,14 @@ function show_lost_records($dbc) {
 		  echo '<H1>Lost Stuff</H1>' ;
 		  echo '<TABLE border=1 style = "font-family:courier;">';
 		  echo '<TR>';
+		  echo '<TH>Id</TH>';
 		  echo '<TH>Name of Item</TH>';
+		  echo '<TH>Description</TH>';
 		  echo '<TH>Location</TH>';
 		  echo '<TH>Date</TH>';
+		  echo '<TH>Owner</TH>';
+		  echo '<TH>Phone</TH>';
+		  echo '<TH>Status</TH>';
 		  echo '</TR>';
 		  # For each row result, generate a table row
 		  while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
@@ -132,9 +137,14 @@ function show_lost_records($dbc) {
 			echo '<TD>' . $row['description'] . '</TD>' ;
 			echo '</TR>' ; */
 			echo '<TR>' ;
+			echo '<TD>' . $row['id'] . '</TD>' ;
 			echo '<TD>' . $row['item_name'] . '</TD>' ;
+			echo '<TD>' . $row['description'] . '</TD>' ;
 			echo '<TD>' . $row['location_name'] . '</TD>' ;
 			echo '<TD>' . $row['lost_date'] . '</TD>' ;
+			echo '<TD>' . $row['owner_name'] . '</TD>' ;
+			echo '<TD>' . $row['phone_number'] . '</TD>' ;
+			echo '<TD>' . $row['status'] . '</TD>' ;
 			echo '</TR>' ;
 		  }
 		  # End the table
@@ -199,9 +209,23 @@ function insert_record_foundstuff($dbc, $findername, $phone, $email, $itemname, 
   check_results($results) ;
   return $results ;
 }
+function insert_record_loststuff($dbc, $ownername, $phone, $email, $itemname, $description, $location, $date) {
+  $query = 'INSERT INTO loststuff(owner_name, phone_number, email, item_name, description, location_name, lost_date, status) VALUES ("' . $ownername . '" , "' . $phone . '" , "' . $email . '" , "' . $description . '" , "' . $itemname . '", "' . $location . '", "' . $date . '" , "Lost")' ;
+  show_query($query);
+  $results = mysqli_query($dbc,$query) ;
+  check_results($results) ;
+  return $results ;
+}
 # Update status of item into the found table using id
 function update_status_foundstuff($dbc, $id, $status) {
   $query = "UPDATE foundstuff SET status='" .$status."' WHERE id='".$id."'";
+  show_query($query);
+  $results = mysqli_query($dbc,$query) ;
+  check_results($results) ;
+  return $results ;
+}
+function update_status_loststuff($dbc, $id, $status) {
+  $query = "UPDATE loststuff SET status='" .$status."' WHERE id='".$id."'";
   show_query($query);
   $results = mysqli_query($dbc,$query) ;
   check_results($results) ;
@@ -212,6 +236,26 @@ function show_query($query) {
   global $debug;
   if($debug)
     echo "<p>Query = $query</p>" ;
+}
+#This function populates the dropdown menu with locations
+function show_locations($dbc){
+	$query = "SELECT name FROM locations";
+	show_query($query);
+	#Execute query
+	$results = mysqli_query($dbc, $query);
+	if($results){
+		while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) ){
+			echo '<option value = '.$row['name'].'>'.$row['name'].'</option>';
+		}
+		mysqli_free_result( $results ) ;
+		
+	}
+	else{
+		#Something went wrong
+		echo '<p>' . mysqli_error( $dbc ) . '</p>'  ;
+	}
+	# Close the connection
+	mysqli_close( $dbc ) ;
 }
 # Checks the query results as a debugging aid
 function check_results($results) {
