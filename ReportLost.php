@@ -13,7 +13,7 @@ require( 'includes/connect_limbo_db.php' ) ;
 require( 'includes/limbohelpers.php' ) ;
 # Check to make sure it is the first time user is visiting the page
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-	$username = "";
+	$ownername = "";
 	$phone = "";
 	$email = "";
 	$name = "";
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 }
 # Check to make sure the form method is post
 if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
-    $username = $_POST['username']; 
+    $ownername = $_POST['ownername']; 
 	$phone = $_POST['phone'];
 	$email = $_POST['email'];
 	$name = $_POST['name'];
@@ -44,8 +44,8 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 		$error[] = 'description';
 	if (!valid_name($phone)) 
 		$error[] = 'phone';
-	if (!valid_name($username)) 
-		$error[] = 'username';
+	if (!valid_name($ownername)) 
+		$error[] = 'ownername';
 	if (!valid_name($email)) 
 		$error[] = 'email';
 	#Report the errors or success
@@ -59,10 +59,10 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 		#Inserts inputs into table if all inputs are valid
 		$name = trim($name);
 		$description = trim($description);
-		$username = trim($username);
+		$ownername = trim($ownername);
 		$phone = trim($phone);
 		$email = trim($email);
-		$result = insert_record_loststuff($dbc, $username, $phone, $email, $name, $description, $location, $date) ;
+		$result = insert_record_loststuff($dbc, $ownername, $phone, $email, $name, $description, $location, $date) ;
 		echo "Success! Thanks" ; 
 	}
 }
@@ -81,7 +81,7 @@ mysqli_close( $dbc ) ;
 <img src="maristlogo.png" id="maristlogo">
 <br><br>
 <form action ="ReportLost.php" method = "POST">
-	Your Name*: <input type="text" name="username" value="<?php if (isset($_POST['username'])) echo $_POST['username'];?>")><br>
+	Your Name*: <input type="text" name="ownername" value="<?php if (isset($_POST['ownername'])) echo $_POST['ownername'];?>")><br>
 	Phone Number*: <input type="text" name="phone" value="<?php if (isset($_POST['phone'])) echo $_POST['phone'];?>")><br>
 	Email*: <input type="text" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>")><br>
 	Name of Item*: <input type="text" name="name" value="<?php if (isset($_POST['name'])) echo $_POST['name'];?>")><br>
