@@ -199,6 +199,15 @@ function insert_record_foundstuff($dbc, $findername, $phone, $email, $itemname, 
   check_results($results) ;
   return $results ;
 }
+function insert_record_loststuff($dbc, $ownername, $phone, $email, $itemname, $description, $location, $date) {
+  $query = 'INSERT INTO loststuff(owner_name, phone_number, email, item_name, description, location_name, lost_date, status) VALUES ("' . $ownername . '" , "' . $phone . '" , "' . $email . '" , "' . $description . '" , "' . $itemname . '", "' . $location . '", "' . $date . '" , "Lost")' ;
+  show_query($query);
+
+  $results = mysqli_query($dbc,$query) ;
+  check_results($results) ;
+
+  return $results ;
+}
 # Update status of item into the found table using id
 function update_status_foundstuff($dbc, $id, $status) {
   $query = "UPDATE foundstuff SET status='" .$status."' WHERE id='".$id."'";
