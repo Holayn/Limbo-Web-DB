@@ -87,7 +87,11 @@ mysqli_close( $dbc ) ;
 	Name of Item*: <input type="text" name="name" value="<?php if (isset($_POST['name'])) echo $_POST['name'];?>")><br>
 	Description of Item: <input type="text" name = "description" value="<?php if (isset($_POST['description'])) echo $_POST['description'];?>")><br>
 	<!--TODO: MAKE DROPDOWN STICKY-->
-	Location Item Was Lost: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")><option value="Hancock">Hancock</option></select><br>
+	Location Item Was Lost: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")><?php 
+			require( 'includes/connect_limbo_db.php' ) ;
+			#populating dropdown with table values in db
+			show_locations($dbc);?>
+			</select><br><br>
 	Approx. Date Lost: <input type="date" name="date" value="<?php if (isset($_POST['date'])) echo $_POST['date'];?>")><br>
 	<!--TODO: SUBMIT PHOTO-->
 	<!--Additional Information: <input type="text" name="addinfo" value="<?php if (isset($_POST['addinfo'])) echo $_POST['addinfo'];?>")>-->
