@@ -231,6 +231,16 @@ function insert_record_foundstuff($dbc, $findername, $phone, $email, $itemname, 
   return $results ;
 }
 
+function insert_record_loststuff($dbc, $username, $phone, $email, $itemname, $description, $location, $date) {
+  $query = 'INSERT INTO loststuff(user_name, phone_number, email, item_name, description, location_name, lost_date) VALUES ("' . $username . '" , "' . $phone . '" , "' . $email . '" , "' . $description . '" , "' . $itemname . '", "' . $location . '", "' . $date . '" )' ;
+  show_query($query);
+
+  $results = mysqli_query($dbc,$query) ;
+  check_results($results) ;
+
+  return $results ;
+}
+
 # Shows the query as a debugging aid
 function show_query($query) {
   global $debug;
