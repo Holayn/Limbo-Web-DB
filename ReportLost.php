@@ -8,11 +8,9 @@
 <body>
 <?php
 # Connect to MySQL server and the database
-require( 'includes/connect_db.php' ) ;
-
+require( 'includes/connect_limbo_db.php' ) ;
 # Includes these helper functions
 require( 'includes/limbohelpers.php' ) ;
-
 # Check to make sure it is the first time user is visiting the page
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 	$username = "";
@@ -21,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 	$name = "";
 	$description = "";
 }
-
 # Check to make sure the form method is post
 if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
     $username = $_POST['username']; 
@@ -31,12 +28,11 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
     $description = $_POST['description'];
     $location = $_POST['location'];
 	$date = $_POST['date'];
-	#TODO: SUBMIT PHOTO
-	$addinfo = $_POST['addinfo'];
+	#TODO: SUBMIT PHOTO, ADD INFO
+	#$addinfo = $_POST['addinfo'];
 	
 	#Make sure user is inputting values into number, first name, and last name
     #Display error message if user does not input required values
-
 	#Creating an error array to store the errors
 	$error = array();
 	
@@ -66,7 +62,7 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 		$username = trim($username);
 		$phone = trim($phone);
 		$email = trim($email);
-		$result = insert_record($dbc, $username, $phone, $email, $name, $description, $location, $date, $addinfo) ;
+		$result = insert_record_loststuff($dbc, $username, $phone, $email, $name, $description, $location, $date) ;
 		echo "Success! Thanks" ; 
 	}
 }
@@ -75,10 +71,9 @@ else if($_SERVER['REQUEST_METHOD'] == 'GET'){
 	if(isset($_GET['id']))
 		show_record($dbc, $_GET['id']);
 }
-
 # Show the records
-show_link_records($dbc);
-
+#delete this later, being used as debugging
+show_lost_records($dbc);
 # Close the connection
 mysqli_close( $dbc ) ;
 ?>
@@ -86,16 +81,16 @@ mysqli_close( $dbc ) ;
 <img src="maristlogo.png" id="maristlogo">
 <br><br>
 <form action ="ReportLost.php" method = "POST">
-	Your Name: <input type="text" name="username" value="<?php if (isset($_POST['username'])) echo $_POST['username'];?>")><br>
-	Phone Number: <input type="text" name="phone" value="<?php if (isset($_POST['phone'])) echo $_POST['phone'];?>")><br>
-	Email: <input type="text" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>")><br>
-	Name of Item: <input type="text" name="name" value="<?php if (isset($_POST['name'])) echo $_POST['name'];?>")><br>
+	Your Name*: <input type="text" name="username" value="<?php if (isset($_POST['username'])) echo $_POST['username'];?>")><br>
+	Phone Number*: <input type="text" name="phone" value="<?php if (isset($_POST['phone'])) echo $_POST['phone'];?>")><br>
+	Email*: <input type="text" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>")><br>
+	Name of Item*: <input type="text" name="name" value="<?php if (isset($_POST['name'])) echo $_POST['name'];?>")><br>
 	Description of Item: <input type="text" name = "description" value="<?php if (isset($_POST['description'])) echo $_POST['description'];?>")><br>
 	<!--TODO: MAKE DROPDOWN STICKY-->
 	Location Item Was Lost: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")><option value="Hancock">Hancock</option></select><br>
 	Approx. Date Lost: <input type="date" name="date" value="<?php if (isset($_POST['date'])) echo $_POST['date'];?>")><br>
 	<!--TODO: SUBMIT PHOTO-->
-	Additional Information: <input type="text" name="addinfo" value="<?php if (isset($_POST['addinfo'])) echo $_POST['addinfo'];?>")>
+	<!--Additional Information: <input type="text" name="addinfo" value="<?php if (isset($_POST['addinfo'])) echo $_POST['addinfo'];?>")>-->
 <input type = "submit" >
 </form>
 </body>
