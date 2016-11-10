@@ -26,14 +26,15 @@ INSERT INTO users (first_name, email, pass)
 #Create loststuff table
 CREATE TABLE IF NOT EXISTS loststuff (
 	id INT PRIMARY KEY AUTO_INCREMENT,
+	owner_name TEXT,
+	phone_number CHAR(10) NOT NULL,
+	email VARCHAR(40) UNIQUE NOT NULL,
 	item_name TEXT NOT NULL,
 	description TEXT NOT NULL,
 	location_name TEXT NOT NULL,
-	#room TEXT,
 	lost_date DATETIME NOT NULL,
 	create_date DATETIME NOT NULL,
 	update_date DATETIME NOT NULL,
-	owner_name TEXT,
 	status SET('Lost') NOT NULL
 );
 
@@ -98,10 +99,10 @@ INSERT INTO locations (create_date, update_date, name)
 			(NOW(), NOW(), "Lower West Cedar Townhouses"),
 			(NOW(), NOW(), "Upper West Cedar Townhouse");
 			
-INSERT INTO loststuff(item_name, description, location_name, lost_date, create_date, update_date, owner_name, status)
-	VALUES  ("Sunglasses", "Black shiny Ray-Ban sunglasses", "Hancock Center" , '2016-03-25', NOW() , NOW(), "Cool Joe", "Lost"),
-			("Bag", "Red Chanel leather bag", "Marist Boathouse", '2016-02-14', NOW() , NOW(), "Lucy" , "Lost"),
-			("Bottle", "White bottle with Marist logo", "St. Peter's", '2016-01-18', NOW() , NOW(), "Snoopy" , "Lost");
+INSERT INTO loststuff(owner_name, phone_number, email, item_name, description, location_name, lost_date, create_date, update_date, status)
+	VALUES  ("Cool Joe", "9999999", "email", "Sunglasses", "Black shiny Ray-Ban sunglasses", "Hancock Center" , '2016-03-25', NOW() , NOW(), "Lost"),
+			("Lucy", "4444444", "emailel", "Bag", "Red Chanel leather bag", "Marist Boathouse", '2016-02-14', NOW() , NOW(), "Lost"),
+			("Snoopy", "3333333", "emaaaaail", "Bottle", "White bottle with Marist logo", "St. Peter's", '2016-01-18', NOW() , NOW(), "Lost");
 			
 INSERT INTO foundstuff(finder_name, phone_number, email, item_name, description, location_name, found_date, create_date, update_date, status)
 	VALUES  ("Tyrell", "8455462884", "ty@gmail.com", "Phone", "Rose Gold iPhone 6 Plus with clear case", "Marist Boathouse", '2016-03-15', NOW(), NOW(), "Found"),
