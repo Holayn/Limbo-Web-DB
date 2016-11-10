@@ -68,7 +68,7 @@ function show_found_records($dbc) {
 		{
 		  # But...wait until we know the query succeeded before
 		  # starting the table.
-		  echo '<H1>Stuff</H1>' ;
+		  echo '<H1>Found Stuff</H1>' ;
 		  echo '<TABLE border=1 style = "font-family:courier;">';
 		  echo '<TR>';
 		  echo '<TH>Finder Name</TH>';
@@ -97,6 +97,61 @@ function show_found_records($dbc) {
 			echo '<TD>' . $row['description'] . '</TD>' ;
 			echo '<TD>' . $row['location_name'] . '</TD>' ;
 			echo '<TD>' . $row['found_date'] . '</TD>' ;
+			echo '</TR>' ;
+		  }
+
+		  # End the table
+		  echo '</TABLE>';
+
+		  # Free up the results in memory
+		  mysqli_free_result( $results ) ;
+		}
+		else
+		{
+		  # If we get here, something has gone wrong
+		  echo '<p>' . mysqli_error( $dbc ) . '</p>'  ;
+		}
+
+		# Close the connection
+		mysqli_close( $dbc ) ;
+}
+
+function show_lost_records($dbc) {
+		# Connect to MySQL server and the database
+		require( 'includes/connect_limbo_db.php' ) ;
+
+		# Create a query to get the id and last name sorted by id in ascending order
+		$query = 'SELECT item_name, location_name, lost_date FROM loststuff';
+
+		# Execute the query
+		$results = mysqli_query( $dbc , $query ) ;
+
+		# Show results
+		if( $results )
+		{
+		  # But...wait until we know the query succeeded before
+		  # starting the table.
+		  echo '<H1>Lost Stuff</H1>' ;
+		  echo '<TABLE border=1 style = "font-family:courier;">';
+		  echo '<TR>';
+		  echo '<TH>Name of Item</TH>';
+		  echo '<TH>Location</TH>';
+		  echo '<TH>Date</TH>';
+		  echo '</TR>';
+
+		  # For each row result, generate a table row
+		  while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
+		  {
+			/* //Creates an anchor link to display more information about the president
+			$alink = '<a href = found.php?id=' . $row['id'] . '>' . $row['id'] . '</a>';
+			echo '<TR>' ;
+			echo '<TD align = right>' . $alink . '</TD>';
+			echo '<TD>' . $row['description'] . '</TD>' ;
+			echo '</TR>' ; */
+			echo '<TR>' ;
+			echo '<TD>' . $row['item_name'] . '</TD>' ;
+			echo '<TD>' . $row['location_name'] . '</TD>' ;
+			echo '<TD>' . $row['lost_date'] . '</TD>' ;
 			echo '</TR>' ;
 		  }
 
