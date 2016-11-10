@@ -222,7 +222,7 @@ function show_record($dbc, $id) {
 
 # Inserts a record into the presidents table with number, first name, and last name
 function insert_record_foundstuff($dbc, $findername, $phone, $email, $itemname, $description, $location, $date) {
-  $query = 'INSERT INTO foundstuff(finder_name, phone_number, email, item_name, description, location_name, found_date) VALUES ("' . $findername . '" , "' . $phone . '" , "' . $email . '" , "' . $description . '" , "' . $itemname . '", "' . $location . '", "' . $date . '" )' ;
+  $query = 'INSERT INTO foundstuff(finder_name, phone_number, email, item_name, description, location_name, found_date, status) VALUES ("' . $findername . '" , "' . $phone . '" , "' . $email . '" , "' . $description . '" , "' . $itemname . '", "' . $location . '", "' . $date . '" , "Found")' ;
   show_query($query);
 
   $results = mysqli_query($dbc,$query) ;
@@ -231,8 +231,8 @@ function insert_record_foundstuff($dbc, $findername, $phone, $email, $itemname, 
   return $results ;
 }
 
-function insert_record_loststuff($dbc, $username, $phone, $email, $itemname, $description, $location, $date) {
-  $query = 'INSERT INTO loststuff(user_name, phone_number, email, item_name, description, location_name, lost_date) VALUES ("' . $username . '" , "' . $phone . '" , "' . $email . '" , "' . $description . '" , "' . $itemname . '", "' . $location . '", "' . $date . '" )' ;
+function insert_record_loststuff($dbc, $ownername, $phone, $email, $itemname, $description, $location, $date) {
+  $query = 'INSERT INTO loststuff(owner_name, phone_number, email, item_name, description, location_name, lost_date, status) VALUES ("' . $ownername . '" , "' . $phone . '" , "' . $email . '" , "' . $description . '" , "' . $itemname . '", "' . $location . '", "' . $date . '" , "Lost")' ;
   show_query($query);
 
   $results = mysqli_query($dbc,$query) ;
