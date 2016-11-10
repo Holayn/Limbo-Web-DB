@@ -28,12 +28,14 @@ DROP TABLE IF EXISTS loststuff;
 CREATE TABLE IF NOT EXISTS loststuff (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	item_name TEXT NOT NULL,
+	user_name TEXT NOT NULL,
+	email TEXT NOT NULL,
+	phone_number CHAR(10),
 	description TEXT NOT NULL,
 	location_name TEXT NOT NULL,
 	lost_date DATETIME NOT NULL,
 	create_date DATETIME NOT NULL,
-	update_date DATETIME NOT NULL,
-	owner_name TEXT NOT NULL
+	update_date DATETIME NOT NULL
 );
 
 #Create foundstuff table
@@ -99,3 +101,6 @@ INSERT INTO locations (create_date, update_date, name)
 
 INSERT INTO foundstuff(finder_name, phone_number, email, item_name, description, location_name, found_date)
 	VALUES ("KAI", "8888888888", "kwwong15@punahou.edu", "Horse", "A stallion", "Hancock Center", "2016-04-16");
+	
+INSERT INTO loststuff( user_name, item_name, location_name, lost_date)
+	VALUES ("Mel", "Dog", "Hancock Center", "2016-04-29");
