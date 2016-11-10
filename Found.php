@@ -7,35 +7,7 @@
 	<title>Found</title>
 </head>
 <body>
-	<img src="maristlogo.png" id="maristlogo">
-	<br><br>
-	<!--page layout-->
-	<div style="position: relative; left: 0; top: 0;">
-			<!--menu for navigation-->
-		<ul>
-		  <li><a href="Home.html">Home</a></li>
-		  <li><a href="Lost.php">Lost</a></li>
-		  <li><a href="Found.php">Found</a></li>
-		  <li><a href="admin_login.php">Admin</a></li>
-		</ul>
-	<img src="white.jpg" height="500" width="1350" style="opacity: 0.8; position: relative; top: -136px; left: 100px;"/>
-	</div>
-		<!--Found form-->
-	<div style="position: relative; bottom: 600px; left: 200px;"> 
-	<h1>Found Something?</h1>
-	<form action ="Found.php" method = "POST">
-		Your Name*: <input type="text" name="findername" value="<?php if (isset($_POST['findername'])) echo $_POST['findername'];?>")><br>
-		Phone Number*: <input type="text" name="phone" value="<?php if (isset($_POST['phone'])) echo $_POST['phone'];?>")><br>
-		Email*: <input type="text" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>")><br>
-		Name of Item*: <input type="text" name="itemname" value="<?php if (isset($_POST['itemname'])) echo $_POST['itemname'];?>")><br>
-		Description of Item: <input type="text" name = "description" value="<?php if (isset($_POST['description'])) echo $_POST['description'];?>")><br>
-		<!--TODO: MAKE DROPDOWN LIST ALL DB LOCATION VALUES-->
-		Location Item Was Found: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")><option value="Hancock">Hancock</option></select><br>
-		Approx. Date Found: <input type="date" name="date" value="<?php if (isset($_POST['date'])) echo $_POST['date'];?>")>
-		<input type = "submit" >
-	</form>
-	</div>
-	<div style="position: relative; bottom: 600px; left: 200px;">
+<div style="position: relative; bottom: 600px; left: 200px;">
 		<?php
 		# Connect to MySQL server and the database
 		require( 'includes/connect_limbo_db.php' ) ;
@@ -97,11 +69,46 @@
 				show_record($dbc, $_GET['id']);
 		} */
 		# Show the records
-		show_found_records($dbc);
+
 		# Close the connection
 		mysqli_close( $dbc ) ;
 		?>
 	</div>
+	<img src="maristlogo.png" id="maristlogo">
+	<br><br>
+	<!--page layout-->
+	<div style="position: absolute; left: 0; top: 150px;">
+			<!--menu for navigation-->
+		<ul>
+		  <li><a href="Home.html">Home</a></li>
+		  <li><a href="Lost.php">Lost</a></li>
+		  <li><a href="Found.php">Found</a></li>
+		  <li><a href="admin_login.php">Admin</a></li>
+		</ul>
+		<img src="white.jpg" height="500" width="1350" style="opacity: 0.8; position: relative; top: -136px; left: 100px;"/>
+		</div> 
+		<div style="position: relative; top: 50px; left: 200px;">
+		<h1>Found Something?</h1>
+		<form action ="Found.php" method = "POST">
+			Your Name*: <input type="text" name="findername" value="<?php if (isset($_POST['findername'])) echo $_POST['findername'];?>")><br><br>
+			Phone Number*: <input type="text" name="phone" value="<?php if (isset($_POST['phone'])) echo $_POST['phone'];?>")><br><br>
+			Email*: <input type="text" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>")><br><br>
+			Name of Item*: <input type="text" name="itemname" value="<?php if (isset($_POST['itemname'])) echo $_POST['itemname'];?>")><br><br>
+			Description of Item: <input type="text" name = "description" value="<?php if (isset($_POST['description'])) echo $_POST['description'];?>")><br><br>
+			Location Item Was Found: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")>
+			<?php 
+			require( 'includes/connect_limbo_db.php' ) ;
+			#populating dropdown with table values in db
+			show_locations($dbc);?>
+			</select><br><br>
+			Approx. Date Found: <input type="date" name="date" value="<?php if (isset($_POST['date'])) echo $_POST['date'];?>")><br><br>
+			<input type = "submit" >
+		</form>
+		</div>
+	<!--<div style="position: relative; bottom: 600px; left: 200px;"> -->
+	
+	<!--<?php show_found_records($dbc);?>-->
+	<!--</div>-->
 	
 </body>
 </html>
