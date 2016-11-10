@@ -222,6 +222,26 @@ function show_query($query) {
   if($debug)
     echo "<p>Query = $query</p>" ;
 }
+#This function populates the dropdown menu with locations
+function show_locations($dbc){
+	$query = "SELECT name FROM locations";
+	show_query($query);
+	#Execute query
+	$results = mysqli_query($dbc, $query);
+	if($results){
+		while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) ){
+			echo '<option value = '.$row['name'].'>'.$row['name'].'</option>';
+		}
+		mysqli_free_result( $results ) ;
+		
+	}
+	else{
+		#Something went wrong
+		echo '<p>' . mysqli_error( $dbc ) . '</p>'  ;
+	}
+	# Close the connection
+	mysqli_close( $dbc ) ;
+}
 # Checks the query results as a debugging aid
 function check_results($results) {
   global $dbc;
