@@ -5,10 +5,9 @@
 
 $debug = true;
 
-# Shows the records in presidents
 function show_records($dbc) {
 		# Connect to MySQL server and the database
-		require( 'includes/connect_db.php' ) ;
+		require( 'includes/connect_limbo_db.php' ) ;
 
 		# Create a query to get the number, first name, and last name sorted by number in descending order
 		$query = 'SELECT number, fname, lname FROM stuff ORDER BY number DESC' ;
@@ -56,7 +55,7 @@ function show_records($dbc) {
 #$dbc, $findername, $phone, $email, $itemname, $description, $location, $date
 function show_found_records($dbc) {
 		# Connect to MySQL server and the database
-		require( 'includes/connect_db.php' ) ;
+		require( 'includes/connect_limbo_db.php' ) ;
 
 		# Create a query to get the id and last name sorted by id in ascending order
 		$query = 'SELECT finder_name, phone_number, email, item_name, description, location_name, found_date FROM foundstuff' ;
