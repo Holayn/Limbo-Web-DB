@@ -63,7 +63,11 @@ mysqli_close( $dbc ) ;
 <br><br>
 <form action ="Found.php" method = "POST">
 	Name of Item*: <input type="text" name="itemname" value="<?php if (isset($_POST['itemname'])) echo $_POST['itemname'];?>")><br>
-	Location Item Was Found: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")><option value="Hancock">Hancock</option></select><br>
+	Location Item Was Found: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")>
+		<?php require( 'includes/connect_limbo_db.php' ) ;
+		#populating dropdown with table values in db
+		show_locations($dbc);?>
+		</select><br><br>
 	Approx. Date Found: <input type="date" name="date" value="<?php if (isset($_POST['date'])) echo $_POST['date'];?>")>
 <input type = "submit" >
 </form>
