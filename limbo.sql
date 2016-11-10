@@ -24,37 +24,36 @@ INSERT INTO users (first_name, email, pass)
 		   ("Snow", "snow.jon@got.com" , "1sc0m1ng");
 	
 #Create loststuff table
-DROP TABLE IF EXISTS loststuff;
 CREATE TABLE IF NOT EXISTS loststuff (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	item_name TEXT NOT NULL,
-	user_name TEXT NOT NULL,
-	email TEXT NOT NULL,
-	phone_number CHAR(10),
 	description TEXT NOT NULL,
 	location_name TEXT NOT NULL,
+	#room TEXT,
 	lost_date DATETIME NOT NULL,
 	create_date DATETIME NOT NULL,
-	update_date DATETIME NOT NULL
+	update_date DATETIME NOT NULL,
+	owner_name TEXT,
+	status SET('Lost') NOT NULL
 );
 
 #Create foundstuff table
-DROP TABLE IF EXISTS foundstuff;
 CREATE TABLE IF NOT EXISTS foundstuff (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	finder_name TEXT NOT NULL,
-	phone_number CHAR(10),
-	email TEXT NOT NULL,
+	finder_name TEXT,
+	phone_number CHAR(10) NOT NULL,
+	email VARCHAR(40) UNIQUE NOT NULL,
 	item_name TEXT NOT NULL,
 	description TEXT NOT NULL,
 	location_name TEXT NOT NULL,
+	#room TEXT,
 	found_date DATETIME NOT NULL,
 	create_date DATETIME NOT NULL,
-	update_date DATETIME NOT NULL
+	update_date DATETIME NOT NULL,
+	status SET('Found', 'Claimed') NOT NULL
 );
 
 #Create locations table
-DROP TABLE IF EXISTS locations;
 CREATE TABLE IF NOT EXISTS locations (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	create_date DATETIME NOT NULL,
@@ -98,9 +97,14 @@ INSERT INTO locations (create_date, update_date, name)
 			(NOW(), NOW(), "Murray Student Center/Music Building"),
 			(NOW(), NOW(), "Lower West Cedar Townhouses"),
 			(NOW(), NOW(), "Upper West Cedar Townhouse");
-
-INSERT INTO foundstuff(finder_name, phone_number, email, item_name, description, location_name, found_date)
-	VALUES ("KAI", "8888888888", "kwwong15@punahou.edu", "Horse", "A stallion", "Hancock Center", "2016-04-16");
+			
+INSERT INTO loststuff(item_name, description, location_name, lost_date, create_date, update_date, owner_name, status)
+	VALUES  ("Sunglasses", "Black shiny Ray-Ban sunglasses", "Hancock Center" , '2016-03-25', NOW() , NOW(), "Cool Joe", "Lost"),
+			("Bag", "Red Chanel leather bag", "Marist Boathouse", '2016-02-14', NOW() , NOW(), "Lucy" , "Lost"),
+			("Bottle", "White bottle with Marist logo", "St. Peter's", '2016-01-18', NOW() , NOW(), "Snoopy" , "Lost");
+			
+INSERT INTO foundstuff(finder_name, phone_number, email, item_name, description, location_name, found_date, create_date, update_date, status)
+	VALUES  ("Tyrell", "8455462884", "ty@gmail.com", "Phone", "Rose Gold iPhone 6 Plus with clear case", "Marist Boathouse", '2016-03-15', NOW(), NOW(), "Found"),
+			("Smith", "2156242147", "smith@gmail.com", "Phone", "White Galaxy Notes 7", "Sheahan Hall", '2016-03-21', NOW(), NOW(), "Found"),
+			("Eliot", "8456212015", "eli@gmail.com", "Slippers", "Green slippers", "Leo Hall", '2016-04-17', NOW(), NOW(), "Found");
 	
-INSERT INTO loststuff( user_name, item_name, location_name, lost_date)
-	VALUES ("Mel", "Dog", "Hancock Center", "2016-04-29");
