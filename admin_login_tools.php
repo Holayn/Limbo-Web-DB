@@ -30,16 +30,20 @@ function load( $page = 'admin.php', $pid = -1 )
 # Validates the print name.
 # Returns -1 if validate fails, and >= 0 if it succeeds
 # which is the primary key id.
-function validate($uname = '')
+function validate($first_name = '',$pass = '')
 {
     global $dbc;
 
-    if(empty($uname))
+    if(empty($first_name)&&empty($pass)){
       return -1 ;
-
+	}
+	
+else {
     # Make the query
-    $query = "SELECT first_name, pass FROM users WHERE first_name='" . $uname . "'" ;
-    show_query($query) ;
+    $query = "SELECT first_name, pass FROM users WHERE first_name='" . $first_name . "' and pass='".$pass."'";
+    # shows query now for debugging purpose
+	# will remove for actual project
+	show_query($query) ;
 
     # Execute the query
     $results = mysqli_query( $dbc, $query ) ;
@@ -52,8 +56,9 @@ function validate($uname = '')
     # We have at least one row, so get the frist one and return it
     $row = mysqli_fetch_array($results, MYSQLI_ASSOC) ;
 
-    $pid = $row [ 'id' ] ;
+    $pid = $row [ 'user_id' ] ;
 
     return intval($pid) ;
+	}
 }
 ?>
