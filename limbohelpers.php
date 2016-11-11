@@ -43,7 +43,7 @@ function show_records($dbc) {
 		# Close the connection
 		mysqli_close( $dbc ) ;
 }
-#$dbc, $findername, $phone, $email, $itemname, $description, $location, $date, $status
+#only for admin
 function admin_show_found_records($dbc) {
 		# Connect to MySQL server and the database
 		require( 'includes/connect_limbo_db.php' ) ;
@@ -68,16 +68,12 @@ function admin_show_found_records($dbc) {
 		  echo '<TH>Location</TH>';
 		  echo '<TH>Date</TH>';
 		  echo '<TH>Status</TH>';
+		  echo '<TH>Delete</TH>';
 		  echo '</TR>';
 		  # For each row result, generate a table row
 		  while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
 		  {
-			/* //Creates an anchor link to display more information about the president
-			$alink = '<a href = found.php?id=' . $row['id'] . '>' . $row['id'] . '</a>';
-			echo '<TR>' ;
-			echo '<TD align = right>' . $alink . '</TD>';
-			echo '<TD>' . $row['description'] . '</TD>' ;
-			echo '</TR>' ; */
+			$alink = '<a href = admin_found.php?id=' . $row['id'] . '>' . "Delete" . '</a>';
 			echo '<TR>' ;
 			echo '<TD>' . $row['id'] . '</TD>' ;
 			echo '<TD>' . $row['finder_name'] . '</TD>' ;
@@ -88,6 +84,7 @@ function admin_show_found_records($dbc) {
 			echo '<TD>' . $row['location_name'] . '</TD>' ;
 			echo '<TD>' . $row['found_date'] . '</TD>' ;
 			echo '<TD>' . $row['status'] . '</TD>' ;
+			echo '<TD>' . $alink. '</TD>' ;
 			echo '</TR>' ;
 		  }
 		  # End the table
@@ -126,16 +123,12 @@ function admin_show_lost_records($dbc) {
 		  echo '<TH>Owner</TH>';
 		  echo '<TH>Phone</TH>';
 		  echo '<TH>Status</TH>';
+		  echo '<TH>Delete</TH>';
 		  echo '</TR>';
 		  # For each row result, generate a table row
 		  while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
 		  {
-			/* //Creates an anchor link to display more information about the president
-			$alink = '<a href = found.php?id=' . $row['id'] . '>' . $row['id'] . '</a>';
-			echo '<TR>' ;
-			echo '<TD align = right>' . $alink . '</TD>';
-			echo '<TD>' . $row['description'] . '</TD>' ;
-			echo '</TR>' ; */
+			$alink = '<a href = admin_lost.php?id=' . $row['id'] . '>' . "Delete" . '</a>';
 			echo '<TR>' ;
 			echo '<TD>' . $row['id'] . '</TD>' ;
 			echo '<TD>' . $row['item_name'] . '</TD>' ;
@@ -145,6 +138,7 @@ function admin_show_lost_records($dbc) {
 			echo '<TD>' . $row['owner_name'] . '</TD>' ;
 			echo '<TD>' . $row['phone_number'] . '</TD>' ;
 			echo '<TD>' . $row['status'] . '</TD>' ;
+			echo '<TD>' . $alink. '</TD>' ;
 			echo '</TR>' ;
 		  }
 		  # End the table
@@ -159,6 +153,22 @@ function admin_show_lost_records($dbc) {
 		}
 		# Close the connection
 		mysqli_close( $dbc ) ;
+}
+#use to delete lost item
+function admin_lost_delete($dbc, $id) {
+  $query = "DELETE FROM loststuff WHERE id='".$id."'";
+  show_query($query);
+  $results = mysqli_query($dbc,$query) ;
+  check_results($results) ;
+  return $results ;
+}
+#used to delete found item
+function admin_found_delete($dbc, $id) {
+  $query = "DELETE FROM foundstuff WHERE id='".$id."'";
+  show_query($query);
+  $results = mysqli_query($dbc,$query) ;
+  check_results($results) ;
+  return $results ;
 }
 # Inserts a record into the found table with number, first name, and last name
 function insert_record_foundstuff($dbc, $findername, $phone, $email, $itemname, $description, $location, $date) {
