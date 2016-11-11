@@ -72,7 +72,6 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 	</div>
 		<!--make updates to found-->
 	<div style="position: relative; bottom: 600px; left: 200px;"> 
-		<h1>Manage</h1>
 		<?php 		
 		# Show the records
 		admin_show_found_records($dbc); ?>
