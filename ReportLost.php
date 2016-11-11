@@ -107,7 +107,7 @@ mysqli_close( $dbc ) ;
 	<!--TODO: SUBMIT PHOTO-->
 	<!--Additional Information: <input type="text" name="addinfo" value="<?php if (isset($_POST['addinfo'])) echo $_POST['addinfo'];?>")>-->
 <input type = "submit" >
-<?php show_lost_records($dbc);?>
+<?php show_result_lost_records($dbc);?>
 		</div>
 
 </form>
