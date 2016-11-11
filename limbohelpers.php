@@ -212,14 +212,13 @@ function show_result_found_records($dbc, $name) {
 		{
 		  # But...wait until we know the query succeeded before
 		  # starting the table.
-		  echo '<H1>Found Stuff</H1>' ;
+		  echo '<H1>Here are found items that match your search:</H1>' ;
 		  echo '<TABLE border=1 style = "font-family:courier;">';
 		  echo '<TR>';
 		  echo '<TH>Name of Item</TH>';
 		  echo '<TH>Location</TH>';
 		  echo '<TH>Date</TH>';
 		  echo '<TH>Status</TH>';
-		  echo '<TH></TH>';
 		  echo '</TR>';
 		  # For each row result, generate a table row
 		  $counter = 0;
@@ -228,12 +227,11 @@ function show_result_found_records($dbc, $name) {
 				//only shows first two records
 			  if($counter < 2){
 			//Creates an anchor link to display more information about the item
-				$alink = '<a href = Lost.php?id=' . $row['id'] . '>' . "More Information" . '</a>';
-				echo '<TD>' . $row['item_name'] . '</TD>' ;
+				$alink = '<a href = Lost.php?id=' . $row['id'] . '>' . $row['item_name'] . '</a>';
+				echo '<TD>' . $alink . '</TD>';
 				echo '<TD>' . $row['location_name'] . '</TD>' ;
 				echo '<TD>' . $row['found_date'] . '</TD>' ;
 				echo '<TD>' . $row['status'] . '</TD>' ;
-				echo '<TD align = right>' . $alink . '</TD>';
 				echo '</TR>' ;
 				$counter++;
 			  }
@@ -372,7 +370,6 @@ function show_initial_lost_records($dbc) {
 		  echo '<TH>Location</TH>';
 		  echo '<TH>Date</TH>';
 		  echo '<TH>Status</TH>';
-		  echo '<TH></TH>';
 		  echo '</TR>';
 		  # For each row result, generate a table row
 		  $counter = 0;
@@ -409,7 +406,7 @@ function show_lost_records($dbc, $id) {
 		# Connect to MySQL server and the database
 		require( 'includes/connect_limbo_db.php' ) ;
 		# Create a query to get all fields from loststuff
-		$query = 'SELECT item_name, description, location_name, lost_date, status FROM loststuff WHERE id = ' . $id;;
+		$query = 'SELECT item_name, description, location_name, lost_date, owner_name, phone_number, status FROM loststuff WHERE id = ' . $id;;
 		# Execute the query
 		$results = mysqli_query( $dbc , $query ) ;
 		# Show results
@@ -424,6 +421,8 @@ function show_lost_records($dbc, $id) {
 		  echo '<TH>Description</TH>';
 		  echo '<TH>Location</TH>';
 		  echo '<TH>Date</TH>';
+		  echo '<TH>Owner Name</TH>';
+		  echo '<TH>Phone Number</TH>';
 		  echo '<TH>Status</TH>';
 		  echo '</TR>';
 		  # For each row result, generate a table row
@@ -434,6 +433,57 @@ function show_lost_records($dbc, $id) {
 			echo '<TD>' . $row['item_name'] . '</TD>' ;
 			echo '<TD>' . $row['location_name'] . '</TD>' ;
 			echo '<TD>' . $row['lost_date'] . '</TD>' ;
+			echo '<TD>' . $row['status'] . '</TD>' ;
+			echo '<TD>' . $row['owner_name'] . '</TD>' ;
+			echo '<TD>' . $row['phone_number'] . '</TD>' ;
+			echo '</TR>' ;
+		  }
+		  # End the table
+		  echo '</TABLE>';
+		  # Free up the results in memory
+		  mysqli_free_result( $results ) ;
+		}
+		else
+		{
+		  # If we get here, something has gone wrong
+		  echo '<p>' . mysqli_error( $dbc ) . '</p>'  ;
+		}
+		# Close the connection
+		mysqli_close( $dbc ) ;
+}
+function show_result_lost_records($dbc) {
+		# Connect to MySQL server and the database
+		require( 'includes/connect_limbo_db.php' ) ;
+		# Create a query to get all fields from loststuff
+		$query = 'SELECT item_name, description, location_name, lost_date, owner_name, phone_number, status FROM loststuff';
+		# Execute the query
+		$results = mysqli_query( $dbc , $query ) ;
+		# Show results
+		if( $results )
+		{
+		  # But...wait until we know the query succeeded before
+		  # starting the table.
+		  echo '<H1>Lost Stuff</H1>' ;
+		  echo '<TABLE border=1 style = "font-family:courier;">';
+		  echo '<TR>';
+		  echo '<TH>Name of Item</TH>';
+		  echo '<TH>Description</TH>';
+		  echo '<TH>Location</TH>';
+		  echo '<TH>Date</TH>';
+		  echo '<TH>Owner Name</TH>';
+		  echo '<TH>Phone Number</TH>';
+		  echo '<TH>Status</TH>';
+		  echo '</TR>';
+		  # For each row result, generate a table row
+		  while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
+		  {
+			echo '<TR>' ;
+			echo '<TD>' . $row['description'] . '</TD>' ;
+			echo '<TD>' . $row['item_name'] . '</TD>' ;
+			echo '<TD>' . $row['location_name'] . '</TD>' ;
+			echo '<TD>' . $row['lost_date'] . '</TD>' ;
+			echo '<TD>' . $row['owner_name'] . '</TD>' ;
+			echo '<TD>' . $row['phone_number'] . '</TD>' ;
 			echo '<TD>' . $row['status'] . '</TD>' ;
 			echo '</TR>' ;
 		  }
