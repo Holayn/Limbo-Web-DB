@@ -234,7 +234,7 @@ function show_result_found_records($dbc, $name) {
 	  while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ))
 	  {
 			//only shows first two records
-		  if($counter < 2){
+		  if($counter < 5){
 		//Creates an anchor link to display more information about the item
 			$alink = '<a href = Lost.php?id=' . $row['id'] . '>' . $row['item_name'] . '</a>';
 			echo '<TD>' . $alink . '</TD>';
@@ -272,7 +272,7 @@ function show_initial_found_records($dbc) {
 	{
 	  # But...wait until we know the query succeeded before
 	  # starting the table.
-	  echo '<H1>Found Stuff</H1>' ;
+	  echo '<H1>Most Recent Found Stuff</H1>' ;
 	  echo '<TABLE border=1 style = "font-family:courier;">';
 	  echo '<TR>';
 	  echo '<TH>Name of Item</TH>';
@@ -285,7 +285,7 @@ function show_initial_found_records($dbc) {
 	  while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ))
 	  {
 			//only shows first two records
-		  if($counter < 2){
+		  if($counter < 5){
 		//Creates an anchor link to display more information about the item
 			$alink = '<a href = Lost.php?id=' . $row['id'] . '>' . $row['item_name'] . '</a>';
 			echo '<TD>' . $alink . '</TD>';
@@ -322,7 +322,7 @@ function show_found_record($dbc, $id) {
 	{
 	  # But...wait until we know the query succeeded before
 	  # starting the table.
-	  echo '<H1>Found Stuff</H1>' ;
+	  echo '<H1>More Information:</H1>' ;
 	  echo '<TABLE border=1 style = "font-family:courier;">';
 	  echo '<TR>';
 	  echo '<TH>Item Name</TH>';
