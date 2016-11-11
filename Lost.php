@@ -89,5 +89,10 @@ mysqli_close( $dbc ) ;
 		show_found_record($dbc, $_GET['id']);
 }?>
 </div>
+<div style="position: relative; bottom: 0px; left:0px;"> 
+<form>
+<button id="butlost" class="button" formaction="ReportLost.php">Report a lost</button>
+</form>
+</div>
 </body>
 </html>
