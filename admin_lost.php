@@ -44,7 +44,17 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 				echo "Success! Thanks" ; 
 			}
 		}
+		# Close the connection
+		mysqli_close( $dbc ) ;
 		?>
+		<?php if($_SERVER['REQUEST_METHOD'] == 'GET'){
+			# Connect to MySQL server and the database
+			require( 'includes/connect_limbo_db.php' ) ;
+			if(isset($_GET['id']))
+				admin_lost_delete($dbc, $_GET['id']);
+			# Close the connection
+			mysqli_close( $dbc ) ;
+		}?>
 	<img src="maristlogo.png" id="maristlogo">
 	<br><br>
 		<!--page layout-->
@@ -60,15 +70,21 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 	</div>
 		<!--make updates to lost-->
 	<div style="position: relative; bottom: 600px; left: 200px;"> 
-		<h1>Lost Something?</h1>
+		<h1>Manage</h1>
+		<?php 
+		#show lost table
+		admin_show_lost_records($dbc); ?>
+		<br/>
 		<form action ="admin_lost.php" method = "POST">
 			Id #*: <input type="text" name="l_id" value="<?php if (isset($_POST['l_id'])) echo $_POST['l_id'];?>")><br>
 			Status*: <input type="text" name="l_status" value="<?php if (isset($_POST['_status'])) echo $_POST['l_status'];?>")><br>
 			<input type = "submit" >
 		</form>
-		<?php 
-		#show lost table
-		admin_show_lost_records($dbc); ?>
 	</div>	
+<div style="position: relative; bottom: 600px; left: 200px;"> 
+		<form>
+		<button id="butlost" class="button" formaction="admin.html">Back to task page</button>
+		</form>
+	</div>
 </body>
 </html>
