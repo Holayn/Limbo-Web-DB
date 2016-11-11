@@ -213,67 +213,21 @@ function show_found_records($dbc) {
 		  echo '<TH></TH>';
 		  echo '</TR>';
 		  # For each row result, generate a table row
-		  while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
+		  $counter = 0;
+		  while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ))
 		  {
+				//only shows first two records
+			  if($counter < 2){
 			//Creates an anchor link to display more information about the item
-			$alink = '<a href = Lost.php?id=' . $row['id'] . '>' . "More Information" . '</a>';
-			echo '<TD>' . $row['item_name'] . '</TD>' ;
-			echo '<TD>' . $row['location_name'] . '</TD>' ;
-			echo '<TD>' . $row['found_date'] . '</TD>' ;
-			echo '<TD>' . $row['status'] . '</TD>' ;
-			echo '<TD align = right>' . $alink . '</TD>';
-			echo '</TR>' ;
-		  }
-		  # End the table
-		  echo '</TABLE>';
-		  # Free up the results in memory
-		  mysqli_free_result( $results ) ;
-		}
-		else
-		{
-		  # If we get here, something has gone wrong
-		  echo '<p>' . mysqli_error( $dbc ) . '</p>'  ;
-		}
-		# Close the connection
-		mysqli_close( $dbc ) ;
-}
-function show_found_record($dbc, $id) {
-		# Connect to MySQL server and the database
-		require( 'includes/connect_limbo_db.php' ) ;
-		# Create a query to get the number, first name, and last name sorted by number in descending order
-		$query = 'SELECT item_name, description, location_name, found_date, status, finder_name, phone_number, email FROM foundstuff WHERE id = ' . $id;
-		# Execute the query
-		$results = mysqli_query( $dbc , $query ) ;
-		# Show results
-		if( $results )
-		{
-		  # But...wait until we know the query succeeded before
-		  # starting the table.
- 		  echo '<H1>Found Stuff</H1>' ;
-		  echo '<TABLE border=1 style = "font-family:courier;">';
-		  echo '<TR>';
-		  echo '<TH>Item Name</TH>';
-		  echo '<TH>Description</TH>';
-		  echo '<TH>Location Name</TH>';
-		  echo '<TH>Found Date</TH>';
-		  echo '<TH>Status</TH>';
-		  echo '<TH>Finder Name</TH>';
-		  echo '<TH>Phone Number</TH>';
-		  echo '<TH>Email</TH>';
-		  echo '</TR>'; 
-		  # For each row result, generate a table row
-		  while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
-		  {
-			echo '<TR>' ;
-			echo '<TD>' . $row['item_name'] . '</TD>' ;
-			echo '<TD>' . $row['description'] . '</TD>' ;
-			echo '<TD>' . $row['location_name'] . '</TD>' ;
-			echo '<TD>' . $row['found_date'] . '</TD>' ;
-			echo '<TD>' . $row['status'] . '</TD>' ;
-			echo '<TD>' . $row['finder_name'] . '</TD>' ;
-			echo '<TD>' . $row['phone_number'] . '</TD>' ;
-			echo '<TD>' . $row['email'] . '</TD>' ;
-			echo '</TR>' ;
+				$alink = '<a href = Lost.php?id=' . $row['id'] . '>' . "More Information" . '</a>';
+				echo '<TD>' . $row['item_name'] . '</TD>' ;
+				echo '<TD>' . $row['location_name'] . '</TD>' ;
+				echo '<TD>' . $row['found_date'] . '</TD>' ;
+				echo '<TD>' . $row['status'] . '</TD>' ;
+				echo '<TD align = right>' . $alink . '</TD>';
+				echo '</TR>' ;
+				$counter++;
+			  }
 		  }
 		  # End the table
 		  echo '</TABLE>';
