@@ -1,78 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<link href="Found.css" type="text/css" rel="stylesheet">
-	<link href="home.css" type="text/css" rel="stylesheet">
-	<title>Found</title>
+<meta charset="utf-8">
+<link href="ReportLost.css" type="text/css" rel="stylesheet">
+<link href="home.css" type="text/css" rel="stylesheet">
+<title>ReportLost</title>
 </head>
 <body>
-		<?php
-		# Connect to MySQL server and the database
-		require( 'includes/connect_limbo_db.php' ) ;
-		# Includes these helper functions
-		require( 'includes/limbohelpers.php' ) ;
-		# Check to make sure it is the first time user is visiting the page
-		if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-			$findername = "";
-			$phone = "";
-			$email = "";
-			$item_name = "";
-			$description = "";
+<?php
+# Connect to MySQL server and the database
+require( 'includes/connect_limbo_db.php' ) ;
+# Includes these helper functions
+require( 'includes/limbohelpers.php' ) ;
+# Check to make sure it is the first time user is visiting the page
+if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+	$ownername = "";
+	$phone = "";
+	$email = "";
+	$name = "";
+	$description = "";
+}
+# Check to make sure the form method is post
+if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
+    $ownername = $_POST['ownername']; 
+	$phone = $_POST['phone'];
+	$email = $_POST['email'];
+	$name = $_POST['name'];
+    $description = $_POST['description'];
+    $location = $_POST['location'];
+	$date = $_POST['date'];
+	#TODO: SUBMIT PHOTO, ADD INFO
+	#$addinfo = $_POST['addinfo'];
+	
+	#Make sure user is inputting values into number, first name, and last name
+    #Display error message if user does not input required values
+	#Creating an error array to store the errors
+	$error = array();
+	
+	#Checks to see if name input is valid	
+	if (!valid_name($name)) 
+		$error[] = 'name';
+	#Checks to see if description input is valid
+	if(!valid_name($description))
+		$error[] = 'description';
+	if (!valid_name($phone)) 
+		$error[] = 'phone';
+	if (!valid_name($ownername)) 
+		$error[] = 'ownername';
+	if (!valid_name($email)) 
+		$error[] = 'email';
+	#Report the errors or success
+	if (!empty($error)){
+		echo 'Error! Please enter the ' ;
+		foreach ($error as $field){
+			echo " - $field";
 		}
-		# Check to make sure the form method is post
-		if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
-			$findername = $_POST['findername']; 
-			$phone = $_POST['phone'];
-			$email = $_POST['email'];
-			$itemname = $_POST['itemname'];
-			$description = $_POST['description'];
-			$location = $_POST['location'];
-			$date = $_POST['date'];
-			
-			#Make sure user is inputting values into number, first name, and last name
-			#Display error message if user does not input required values
-			#Creating an error array to store the errors
-			$error = array();
-			
-			#Checks to see if name input is valid	
-			if (!valid_name($itemname)) 
-				$error[] = 'itemname';
-			if (!valid_number($phone)) 
-				$error[] = 'phone';
-			if (!valid_name($findername)) 
-				$error[] = 'findername';
-			if (!valid_name($email)) 
-				$error[] = 'email';
-			#Report the errors or success
-			if (!empty($error)){
-				echo 'Error! Please enter the ' ;
-				foreach ($error as $field){
-					echo " - $field";
-				}
-			}
-			else { 
-				#Inserts inputs into table if all inputs are valid
-				$itemname = trim($itemname);
-				$description = trim($description);
-				$findername = trim($findername);
-				$phone = trim($phone);
-				$email = trim($email);
-				$result = insert_record_foundstuff($dbc, $findername, $phone, $email, $itemname, $description, $location, $date);
-				echo "Success! Thanks" ; 
-			}
-		}
-		//If the user clicks on a link, the GET method will be returned, so run this else-if block to show the user more information about the president
-		/* else if($_SERVER['REQUEST_METHOD'] == 'GET'){
-			if(isset($_GET['id']))
-				show_record($dbc, $_GET['id']);
-		} */
-		# Close the connection
-		mysqli_close( $dbc ) ;
-		?>
-	<img src="maristlogo.png" id="maristlogo">
-	<br><br>
-	<!--page layout-->
+	}
+	else { 
+		#Inserts inputs into table if all inputs are valid
+		$name = trim($name);
+		$description = trim($description);
+		$ownername = trim($ownername);
+		$phone = trim($phone);
+		$email = trim($email);
+		$result = insert_record_loststuff($dbc, $ownername, $phone, $email, $name, $description, $location, $date) ;
+		echo "Success! Thanks" ; 
+	}
+}
+//If the user clicks on a link, the GET method will be returned, so run this else-if block to show the user more information about the president
+else if($_SERVER['REQUEST_METHOD'] == 'GET'){
+	if(isset($_GET['id']))
+		show_record($dbc, $_GET['id']);
+}
+#delete this later, being used as debugging
+# Close the connection
+mysqli_close( $dbc ) ;
+?>
+<img src="maristlogo.png" id="maristlogo">
+<br><br>
+<!--page layout-->
 	<div style="position: absolute; left: 0; top: 150px;">
 			<!--menu for navigation-->
 		<ul>
@@ -83,30 +89,27 @@
 		</ul>
 		<img src="white.jpg" height="500" width="1350" style="opacity: 0.8; position: relative; top: -136px; left: 100px;"/>
 		</div> 
-		<div style="position: relative; top: 50px; left: 200px;">
-		<h1>Found Something?</h1>
-		<form action ="Found.php" method = "POST">
-			Your Name*: <input type="text" name="findername" value="<?php if (isset($_POST['findername'])) echo $_POST['findername'];?>")><br><br>
-			Phone Number*: <input type="text" name="phone" value="<?php if (isset($_POST['phone'])) echo $_POST['phone'];?>")><br><br>
-			Email*: <input type="text" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>")><br><br>
-			Name of Item*: <input type="text" name="itemname" value="<?php if (isset($_POST['itemname'])) echo $_POST['itemname'];?>")><br><br>
-			Description of Item: <input type="text" name = "description" value="<?php if (isset($_POST['description'])) echo $_POST['description'];?>")><br><br>
-			Location Item Was Found: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")>
-			<?php 
+				<div style="position: relative; top: 50px; left: 200px;">
+<h1> Report a Lost Item </h1>
+<form action ="ReportLost.php" method = "POST">
+	Your Name*: <input type="text" name="ownername" value="<?php if (isset($_POST['ownername'])) echo $_POST['ownername'];?>")><br>
+	Phone Number*: <input type="text" name="phone" value="<?php if (isset($_POST['phone'])) echo $_POST['phone'];?>")><br>
+	Email*: <input type="text" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>")><br>
+	Name of Item*: <input type="text" name="name" value="<?php if (isset($_POST['name'])) echo $_POST['name'];?>")><br>
+	Description of Item: <input type="text" name = "description" value="<?php if (isset($_POST['description'])) echo $_POST['description'];?>")><br>
+	<!--TODO: MAKE DROPDOWN STICKY-->
+	Location Item Was Lost: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")><?php 
 			require( 'includes/connect_limbo_db.php' ) ;
 			#populating dropdown with table values in db
 			show_locations($dbc);?>
 			</select><br><br>
-			Approx. Date Found: <input type="date" name="date" value="<?php if (isset($_POST['date'])) echo $_POST['date'];?>")><br><br>
-			<input type = "submit" >
-		</form>
-	
-	<?php show_initial_lost_records($dbc);?>
-	<?php if($_SERVER['REQUEST_METHOD'] == 'GET'){
-	if(isset($_GET['id']))
-		show_lost_records($dbc, $_GET['id']);
-	}?>
-	</div>
-	
+	Approx. Date Lost: <input type="date" name="date" value="<?php if (isset($_POST['date'])) echo $_POST['date'];?>")><br>
+	<!--TODO: SUBMIT PHOTO-->
+	<!--Additional Information: <input type="text" name="addinfo" value="<?php if (isset($_POST['addinfo'])) echo $_POST['addinfo'];?>")>-->
+<input type = "submit" >
+<?php show_result_lost_records($dbc);?>
+		</div>
+
+</form>
 </body>
 </html>
