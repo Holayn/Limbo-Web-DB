@@ -49,6 +49,14 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 		# Close the connection
 		mysqli_close( $dbc ) ;
 		?>
+		<?php if($_SERVER['REQUEST_METHOD'] == 'GET'){
+			# Connect to MySQL server and the database
+		require( 'includes/connect_limbo_db.php' ) ;
+			if(isset($_GET['id']))
+				admin_found_delete($dbc, $_GET['id']);
+			# Close the connection
+		mysqli_close( $dbc ) ;
+		}?>
 	<img src="maristlogo.png" id="maristlogo">
 	<br><br>
 		<!--page layout-->
@@ -64,15 +72,21 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 	</div>
 		<!--make updates to found-->
 	<div style="position: relative; bottom: 600px; left: 200px;"> 
-		<h1>Found Something?</h1>
-		<form action ="admin.php" method = "POST">
+		<h1>Manage</h1>
+		<?php 		
+		# Show the records
+		admin_show_found_records($dbc); ?>
+		<br/>
+		<form action ="admin_found.php" method = "POST">
 			Id #*: <input type="text" name="f_id" value="<?php if (isset($_POST['f_id'])) echo $_POST['f_id'];?>")><br>
 			Status*: <input type="text" name="f_status" value="<?php if (isset($_POST['f_status'])) echo $_POST['f_status'];?>")><br>
 			<input type = "submit" >
 		</form>
-		<?php 		
-		# Show the records
-		show_found_records($dbc); ?>
 	</div>
+	<div style="position: relative; bottom: 600px; left: 200px;"> 
+		<form>
+		<button id="butlost" class="button" formaction="admin.html">Back to task page</button>
+		</form>
+		</div>
 </body>
 </html>
