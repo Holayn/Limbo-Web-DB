@@ -9,7 +9,7 @@ RC  07-Nov-13   Created.
 <html>
 <?php
 # Connect to MySQL server and the database
-require( 'includes/connect_db.php' ) ;
+require( 'includes/connect_limbo_db.php' ) ;
 
 # Connect to MySQL server and the database
 require( 'includes/admin_login_tools.php' ) ;
@@ -29,14 +29,14 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 	
     else
 		#brings them to admin control page
-		load('admin.php', $pid);
+		load('admin.html', $pid);
 }
 ?>
 
 <head>
 	<meta charset="utf-8">
 	<link href="home.css" type="text/css" rel="stylesheet">
-	<title>Home</title>
+	<title>Admin</title>
 </head>
 <body>
 	<img src="maristlogo.png" id="maristlogo">
@@ -51,7 +51,7 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 		  <li><a href="admin_login.php">Admin</a></li>
 		</ul>
 	<img src="white.jpg" height="500" width="1000" style="opacity: 0.8; position: relative; top: -136px; left: 100px;"/>
-	<img src="homedoge.jpg" height="400" width="500" style="position: absolute; top: 50px; left: 500px;"/>
+	<img src="secret_doge.jpg" height="400" width="500" style="position: absolute; top: 50px; left: 500px;"/>
 	</div>
 		<!--Login form for the admin-->
 	<div style="position: relative; bottom: 500px; left: 200px;"> 

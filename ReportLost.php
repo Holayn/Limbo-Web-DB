@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <link href="ReportLost.css" type="text/css" rel="stylesheet">
+<link href="home.css" type="text/css" rel="stylesheet">
 <title>ReportLost</title>
 </head>
 <body>
@@ -71,15 +72,25 @@ else if($_SERVER['REQUEST_METHOD'] == 'GET'){
 	if(isset($_GET['id']))
 		show_record($dbc, $_GET['id']);
 }
-# Show the records
 #delete this later, being used as debugging
-show_lost_records($dbc);
 # Close the connection
 mysqli_close( $dbc ) ;
 ?>
-
 <img src="maristlogo.png" id="maristlogo">
 <br><br>
+<!--page layout-->
+	<div style="position: absolute; left: 0; top: 150px;">
+			<!--menu for navigation-->
+		<ul>
+		  <li><a href="Home.html">Home</a></li>
+		  <li><a href="Lost.php">Lost</a></li>
+		  <li><a href="Found.php">Found</a></li>
+		  <li><a href="admin_login.php">Admin</a></li>
+		</ul>
+		<img src="white.jpg" height="500" width="1350" style="opacity: 0.8; position: relative; top: -136px; left: 100px;"/>
+		</div> 
+				<div style="position: relative; top: 50px; left: 200px;">
+<h1> Report a Lost Item </h1>
 <form action ="ReportLost.php" method = "POST">
 	Your Name*: <input type="text" name="ownername" value="<?php if (isset($_POST['ownername'])) echo $_POST['ownername'];?>")><br>
 	Phone Number*: <input type="text" name="phone" value="<?php if (isset($_POST['phone'])) echo $_POST['phone'];?>")><br>
@@ -96,6 +107,9 @@ mysqli_close( $dbc ) ;
 	<!--TODO: SUBMIT PHOTO-->
 	<!--Additional Information: <input type="text" name="addinfo" value="<?php if (isset($_POST['addinfo'])) echo $_POST['addinfo'];?>")>-->
 <input type = "submit" >
+<?php show_lost_records($dbc);?>
+		</div>
+
 </form>
 </body>
 </html>

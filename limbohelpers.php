@@ -44,7 +44,7 @@ function show_records($dbc) {
 		mysqli_close( $dbc ) ;
 }
 #$dbc, $findername, $phone, $email, $itemname, $description, $location, $date, $status
-function show_found_records($dbc) {
+function admin_show_found_records($dbc) {
 		# Connect to MySQL server and the database
 		require( 'includes/connect_limbo_db.php' ) ;
 		# Create a query to get all fields in foundstuff 
@@ -103,7 +103,7 @@ function show_found_records($dbc) {
 		# Close the connection
 		mysqli_close( $dbc ) ;
 }
-function show_lost_records($dbc) {
+function admin_show_lost_records($dbc) {
 		# Connect to MySQL server and the database
 		require( 'includes/connect_limbo_db.php' ) ;
 		# Create a query to get all fields from loststuff
@@ -210,7 +210,7 @@ function insert_record_foundstuff($dbc, $findername, $phone, $email, $itemname, 
   return $results ;
 }
 function insert_record_loststuff($dbc, $ownername, $phone, $email, $itemname, $description, $location, $date) {
-  $query = 'INSERT INTO loststuff(owner_name, phone_number, email, item_name, description, location_name, lost_date, status) VALUES ("' . $ownername . '" , "' . $phone . '" , "' . $email . '" , "' . $description . '" , "' . $itemname . '", "' . $location . '", "' . $date . '" , "Lost")' ;
+  $query = 'INSERT INTO loststuff(owner_name, phone_number, email, item_name, description, location_name, lost_date) VALUES ("' . $ownername . '" , "' . $phone . '" , "' . $email . '" , "' . $description . '" , "' . $itemname . '", "' . $location . '", "' . $date . '")' ;
   show_query($query);
   $results = mysqli_query($dbc,$query) ;
   check_results($results) ;
@@ -230,6 +230,109 @@ function update_status_loststuff($dbc, $id, $status) {
   $results = mysqli_query($dbc,$query) ;
   check_results($results) ;
   return $results ;
+}
+#$dbc, $findername, $phone, $email, $itemname, $description, $location, $date, $status
+function show_found_records($dbc) {
+		# Connect to MySQL server and the database
+		require( 'includes/connect_limbo_db.php' ) ;
+		# Create a query to get all fields in foundstuff 
+		$query = 'SELECT item_name, description, location_name, found_date, status FROM foundstuff' ;
+		# Execute the query
+		$results = mysqli_query( $dbc , $query ) ;
+		# Show results
+		if( $results )
+		{
+		  # But...wait until we know the query succeeded before
+		  # starting the table.
+		  echo '<H1>Found Stuff</H1>' ;
+		  echo '<TABLE border=1 style = "font-family:courier;">';
+		  echo '<TR>';
+		  echo '<TH>Name of Item</TH>';
+		  echo '<TH>Description of item</TH>';
+		  echo '<TH>Location</TH>';
+		  echo '<TH>Date</TH>';
+		  echo '<TH>Status</TH>';
+		  echo '</TR>';
+		  # For each row result, generate a table row
+		  while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
+		  {
+			/* //Creates an anchor link to display more information about the president
+			$alink = '<a href = found.php?id=' . $row['id'] . '>' . $row['id'] . '</a>';
+			echo '<TR>' ;
+			echo '<TD align = right>' . $alink . '</TD>';
+			echo '<TD>' . $row['description'] . '</TD>' ;
+			echo '</TR>' ; */
+			echo '<TR>' ;
+			echo '<TD>' . $row['item_name'] . '</TD>' ;
+			echo '<TD>' . $row['description'] . '</TD>' ;
+			echo '<TD>' . $row['location_name'] . '</TD>' ;
+			echo '<TD>' . $row['found_date'] . '</TD>' ;
+			echo '<TD>' . $row['status'] . '</TD>' ;
+			echo '</TR>' ;
+		  }
+		  # End the table
+		  echo '</TABLE>';
+		  # Free up the results in memory
+		  mysqli_free_result( $results ) ;
+		}
+		else
+		{
+		  # If we get here, something has gone wrong
+		  echo '<p>' . mysqli_error( $dbc ) . '</p>'  ;
+		}
+		# Close the connection
+		mysqli_close( $dbc ) ;
+}
+function show_lost_records($dbc) {
+		# Connect to MySQL server and the database
+		require( 'includes/connect_limbo_db.php' ) ;
+		# Create a query to get all fields from loststuff
+		$query = 'SELECT item_name, description, location_name, lost_date,status FROM loststuff';
+		# Execute the query
+		$results = mysqli_query( $dbc , $query ) ;
+		# Show results
+		if( $results )
+		{
+		  # But...wait until we know the query succeeded before
+		  # starting the table.
+		  echo '<H1>Lost Stuff</H1>' ;
+		  echo '<TABLE border=1 style = "font-family:courier;">';
+		  echo '<TR>';
+		  echo '<TH>Name of Item</TH>';
+		  echo '<TH>Description</TH>';
+		  echo '<TH>Location</TH>';
+		  echo '<TH>Date</TH>';
+		  echo '<TH>Status</TH>';
+		  echo '</TR>';
+		  # For each row result, generate a table row
+		  while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
+		  {
+			/* //Creates an anchor link to display more information about the president
+			$alink = '<a href = found.php?id=' . $row['id'] . '>' . $row['id'] . '</a>';
+			echo '<TR>' ;
+			echo '<TD align = right>' . $alink . '</TD>';
+			echo '<TD>' . $row['description'] . '</TD>' ;
+			echo '</TR>' ; */
+			echo '<TR>' ;
+			echo '<TD>' . $row['item_name'] . '</TD>' ;
+			echo '<TD>' . $row['description'] . '</TD>' ;
+			echo '<TD>' . $row['location_name'] . '</TD>' ;
+			echo '<TD>' . $row['lost_date'] . '</TD>' ;
+			echo '<TD>' . $row['status'] . '</TD>' ;
+			echo '</TR>' ;
+		  }
+		  # End the table
+		  echo '</TABLE>';
+		  # Free up the results in memory
+		  mysqli_free_result( $results ) ;
+		}
+		else
+		{
+		  # If we get here, something has gone wrong
+		  echo '<p>' . mysqli_error( $dbc ) . '</p>'  ;
+		}
+		# Close the connection
+		mysqli_close( $dbc ) ;
 }
 # Shows the query as a debugging aid
 function show_query($query) {

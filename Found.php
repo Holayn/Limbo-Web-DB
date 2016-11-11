@@ -7,7 +7,6 @@
 	<title>Found</title>
 </head>
 <body>
-<div style="position: relative; bottom: 600px; left: 200px;">
 		<?php
 		# Connect to MySQL server and the database
 		require( 'includes/connect_limbo_db.php' ) ;
@@ -68,12 +67,9 @@
 			if(isset($_GET['id']))
 				show_record($dbc, $_GET['id']);
 		} */
-		# Show the records
-
 		# Close the connection
 		mysqli_close( $dbc ) ;
 		?>
-	</div>
 	<img src="maristlogo.png" id="maristlogo">
 	<br><br>
 	<!--page layout-->
@@ -104,11 +100,9 @@
 			Approx. Date Found: <input type="date" name="date" value="<?php if (isset($_POST['date'])) echo $_POST['date'];?>")><br><br>
 			<input type = "submit" >
 		</form>
-		</div>
-	<!--<div style="position: relative; bottom: 600px; left: 200px;"> -->
 	
-	<!--<?php show_found_records($dbc);?>-->
-	<!--</div>-->
+	<?php show_lost_records($dbc);?>
+	</div>
 	
 </body>
 </html>

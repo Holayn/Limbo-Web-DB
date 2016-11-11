@@ -47,8 +47,8 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 		}
 		# Check to make sure the form method is post
 		if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
-			$id = $_POST['id'];
-			$status = $_POST['status'];
+			$id = $_POST['f_id'];
+			$status = $_POST['f_status'];
 			
 			#Checks to see if name input is valid	
 			if (empty($id)&&empty($status)) 
@@ -70,11 +70,48 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 	<div style="position: relative; bottom: 600px; left: 200px;"> 
 		<h1>Found Something?</h1>
 		<form action ="admin.php" method = "POST">
-			Id #*: <input type="text" name="id" value="<?php if (isset($_POST['id'])) echo $_POST['id'];?>")><br>
-			Status*: <input type="text" name="status" value="<?php if (isset($_POST['status'])) echo $_POST['status'];?>")><br>
+			Id #*: <input type="text" name="f_id" value="<?php if (isset($_POST['f_id'])) echo $_POST['f_id'];?>")><br>
+			Status*: <input type="text" name="f_status" value="<?php if (isset($_POST['f_status'])) echo $_POST['f_status'];?>")><br>
 			<input type = "submit" >
 		</form>
 	</div>
-		<!--need to show lost stuff table too-->
+			<!--need to show lost stuff table too-->
+	<div style="position: relative; bottom: 600px; left: 200px;">
+		<?php
+		# Connect to MySQL server and the database
+		require( 'includes/connect_limbo_db.php' ) ;
+		# Check to make sure it is the first time user is visiting the page
+		if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+			$id = '';
+			$status = '';
+		}
+		# Check to make sure the form method is post
+		if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
+			$id = $_POST['l_id'];
+			$status = $_POST['l_status'];
+			
+			#Checks to see if name input is valid	
+			if (empty($id)&&empty($status)) 
+				echo 'error';
+			else{
+				$id = trim($id);
+				$status = trim($status);
+				$result = update_status_loststuff($dbc, $id, $status);
+				echo "Success! Thanks" ; 
+			}
+		}
+		# Show the records
+		show_lost_records($dbc);
+		?>
+	</div>
+	<!--make updates to found-->
+	<div style="position: relative; bottom: 600px; left: 200px;"> 
+		<h1>Lost Something?</h1>
+		<form action ="admin.php" method = "POST">
+			Id #*: <input type="text" name="l_id" value="<?php if (isset($_POST['l_id'])) echo $_POST['l_id'];?>")><br>
+			Status*: <input type="text" name="l_status" value="<?php if (isset($_POST['_status'])) echo $_POST['l_status'];?>")><br>
+			<input type = "submit" >
+		</form>
+	</div>	
 </body>
 </html>

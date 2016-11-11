@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <link href="Lost.css" type="text/css" rel="stylesheet">
+<link href="home.css" type="text/css" rel="stylesheet">
 <title>Lost</title>
 </head>
 <body>
@@ -11,12 +12,10 @@
 require( 'includes/connect_limbo_db.php' ) ;
 # Includes these helper functions
 require( 'includes/limbohelpers.php' ) ;
-
 # Check to make sure it is the first time user is visiting the page
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 	$item_name = "";
 }
-
 # Check to make sure the form method is post
 if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 	$itemname = $_POST['itemname'];
@@ -25,7 +24,6 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 	
 	#Make sure user is inputting values into number, first name, and last name
     #Display error message if user does not input required values
-
 	#Creating an error array to store the errors
 	$error = array();
 	
@@ -51,27 +49,37 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 	if(isset($_GET['id']))
 		show_record($dbc, $_GET['id']);
 } */
-
-# Show the records
-#show_lost_records($dbc);
-
 # Close the connection
 mysqli_close( $dbc ) ;
 ?>
 
 <img src="maristlogo.png" id="maristlogo">
 <br><br>
+<!--page layout-->
+	<div style="position: absolute; left: 0; top: 150px;">
+			<!--menu for navigation-->
+		<ul>
+		  <li><a href="Home.html">Home</a></li>
+		  <li><a href="Lost.php">Lost</a></li>
+		  <li><a href="Found.php">Found</a></li>
+		  <li><a href="admin_login.php">Admin</a></li>
+		</ul>
+		<img src="white.jpg" height="500" width="1350" style="opacity: 0.8; position: relative; top: -136px; left: 100px;"/>
+		</div> 
+		<div style="position: relative; top: 50px; left: 200px;">
+		<h1> Lost something? </h1>
 <form action ="Found.php" method = "POST">
 	Name of Item*: <input type="text" name="itemname" value="<?php if (isset($_POST['itemname'])) echo $_POST['itemname'];?>")><br>
-	Location Item Was Found: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")>
+	Location Item Lost: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")>
 		<?php require( 'includes/connect_limbo_db.php' ) ;
 		#populating dropdown with table values in db
 		show_locations($dbc);?>
 		</select><br><br>
-	Approx. Date Found: <input type="date" name="date" value="<?php if (isset($_POST['date'])) echo $_POST['date'];?>")>
+	Approx. Date Lost: <input type="date" name="date" value="<?php if (isset($_POST['date'])) echo $_POST['date'];?>")>
 <input type = "submit" >
 </form>
 <!--showing after inputs -->
-<?php show_lost_records($dbc);?>
+<?php show_found_records($dbc);?>
+</div>
 </body>
 </html>
