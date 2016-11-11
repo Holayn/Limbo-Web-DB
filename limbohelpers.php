@@ -271,7 +271,6 @@ function show_initial_found_records($dbc) {
 		  echo '<TH>Location</TH>';
 		  echo '<TH>Date</TH>';
 		  echo '<TH>Status</TH>';
-		  echo '<TH></TH>';
 		  echo '</TR>';
 		  # For each row result, generate a table row
 		  $counter = 0;
@@ -280,12 +279,11 @@ function show_initial_found_records($dbc) {
 				//only shows first two records
 			  if($counter < 2){
 			//Creates an anchor link to display more information about the item
-				$alink = '<a href = Lost.php?id=' . $row['id'] . '>' . "More Information" . '</a>';
-				echo '<TD>' . $row['item_name'] . '</TD>' ;
+				$alink = '<a href = Lost.php?id=' . $row['id'] . '>' . $row['item_name'] . '</a>';
+				echo '<TD>' . $alink . '</TD>';
 				echo '<TD>' . $row['location_name'] . '</TD>' ;
 				echo '<TD>' . $row['found_date'] . '</TD>' ;
 				echo '<TD>' . $row['status'] . '</TD>' ;
-				echo '<TD align = right>' . $alink . '</TD>';
 				echo '</TR>' ;
 				$counter++;
 			  }
@@ -383,13 +381,12 @@ function show_initial_lost_records($dbc) {
 			//only shows first two records
 			  if($counter < 2){
 			//Creates an anchor link to display more information about the item
-			$alink = '<a href = Found.php?id=' . $row['id'] . '>' . "More Information" . '</a>';
-			echo '<TD>' . $row['item_name'] . '</TD>' ;
+			$alink = '<a href = Found.php?id=' . $row['id'] . '>' . $row['item_name'] . '</a>';
+			echo '<TD>' . $alink . '</TD>';
 			echo '<TD>' . $row['description'] . '</TD>' ;
 			echo '<TD>' . $row['location_name'] . '</TD>' ;
 			echo '<TD>' . $row['lost_date'] . '</TD>' ;
 			echo '<TD>' . $row['status'] . '</TD>' ;
-			echo '<TD align = right>' . $alink . '</TD>';
 			echo '</TR>' ;
 			$counter++;
 		  }
