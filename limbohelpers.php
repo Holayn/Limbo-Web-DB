@@ -56,7 +56,7 @@ function admin_show_found_records($dbc) {
 		{
 		  # But...wait until we know the query succeeded before
 		  # starting the table.
-		  echo '<H1>Found Stuff</H1>' ;
+		  echo '<H1> Manage Found Stuff</H1>' ;
 		  echo '<TABLE border=1 style = "font-family:courier;">';
 		  echo '<TR>';
 		  echo '<TH>Id</TH>';
@@ -112,7 +112,7 @@ function admin_show_lost_records($dbc) {
 		{
 		  # But...wait until we know the query succeeded before
 		  # starting the table.
-		  echo '<H1>Lost Stuff</H1>' ;
+		  echo '<H1>Manage Lost Stuff</H1>' ;
 		  echo '<TABLE border=1 style = "font-family:courier;">';
 		  echo '<TR>';
 		  echo '<TH>Id</TH>';
