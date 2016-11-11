@@ -101,7 +101,11 @@
 			<input type = "submit" >
 		</form>
 	
-	<?php show_lost_records($dbc);?>
+	<?php show_initial_lost_records($dbc);?>
+	<?php if($_SERVER['REQUEST_METHOD'] == 'GET'){
+	if(isset($_GET['id']))
+		show_lost_records($dbc, $_GET['id']);
+	}?>
 	</div>
 	
 </body>
