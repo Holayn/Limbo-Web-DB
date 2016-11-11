@@ -40,10 +40,13 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 	else { 
 		#Inserts inputs into table if all inputs are valid
 		$itemname = trim($itemname);
-		$result = insert_record_foundstuff($dbc, $itemname, $location, $date);
-		echo "Success! Thanks" ; 
+		#we want this to display a table...
+		/* $result = insert_record_foundstuff($dbc, $itemname, $location, $date); */
+		//For now, only pass in the name
+		$result = show_result_found_records($dbc, $itemname);
+		echo "Here are found items that match your search:" ; 
 	}
-}
+} 
 //If the user clicks on a link, the GET method will be returned, so run this else-if block to show the user more information about the president
 /* else if($_SERVER['REQUEST_METHOD'] == 'GET'){
 	if(isset($_GET['id']))
@@ -77,10 +80,10 @@ mysqli_close( $dbc ) ;
 		show_locations($dbc);?>
 		</select><br><br>
 	Approx. Date Lost: <input type="date" name="date" value="<?php if (isset($_POST['date'])) echo $_POST['date'];?>")>
-<input type = "submit" >
+<input type = "submit">
 </form>
 <!--showing after inputs -->
-<?php show_found_records($dbc);?>
+<?php show_initial_found_records($dbc);?> <!-- edit this to show first few records...?-->
 <?php if($_SERVER['REQUEST_METHOD'] == 'GET'){
 	if(isset($_GET['id']))
 		show_found_record($dbc, $_GET['id']);
