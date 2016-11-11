@@ -178,8 +178,8 @@ function insert_record_foundstuff($dbc, $findername, $phone, $email, $itemname, 
   check_results($results) ;
   return $results ;
 }
-function insert_record_loststuff($dbc, $ownername, $phone, $email, $itemname, $description, $location, $date) {
-  $query = 'INSERT INTO loststuff(owner_name, phone_number, email, item_name, description, location_name, lost_date) VALUES ("' . $ownername . '" , "' . $phone . '" , "' . $email . '" , "' . $description . '" , "' . $itemname . '", "' . $location . '", "' . $date . '")' ;
+function insert_record_loststuff($dbc, $owner_name, $phone, $item_name, $description, $location, $date) {
+  $query = 'INSERT INTO loststuff(owner_name, phone_number, item_name, description, location_name, lost_date) VALUES ("' . $owner_name . '" , "' . $phone . '" , "' . $description . '" , "' . $item_name . '", "' . $location . '", "' . $date . '")' ;
   show_query($query);
   $results = mysqli_query($dbc,$query) ;
   check_results($results) ;
