@@ -70,7 +70,6 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 	</div>
 		<!--make updates to lost-->
 	<div style="position: relative; bottom: 600px; left: 200px;"> 
-		<h1>Manage</h1>
 		<?php 
 		#show lost table
 		admin_show_lost_records($dbc); ?>
