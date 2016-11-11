@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <link href="Lost.css" type="text/css" rel="stylesheet">
-<link href="home.css" type="text/css" rel="stylesheet">
+<link href="Home.css" type="text/css" rel="stylesheet">
 <title>Lost</title>
 </head>
 <body>
@@ -47,7 +47,7 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 //If the user clicks on a link, the GET method will be returned, so run this else-if block to show the user more information about the president
 /* else if($_SERVER['REQUEST_METHOD'] == 'GET'){
 	if(isset($_GET['id']))
-		show_record($dbc, $_GET['id']);
+		show_found_record($dbc, $_GET['id']);
 } */
 # Close the connection
 mysqli_close( $dbc ) ;
@@ -56,7 +56,7 @@ mysqli_close( $dbc ) ;
 <img src="maristlogo.png" id="maristlogo">
 <br><br>
 <!--page layout-->
-	<div style="position: absolute; left: 0; top: 150px;">
+	<div style="position: absolute; left: 0; top: 150px; width: 100%">
 			<!--menu for navigation-->
 		<ul>
 		  <li><a href="Home.html">Home</a></li>
@@ -64,11 +64,12 @@ mysqli_close( $dbc ) ;
 		  <li><a href="Found.php">Found</a></li>
 		  <li><a href="admin_login.php">Admin</a></li>
 		</ul>
-		<img src="white.jpg" height="500" width="1350" style="opacity: 0.8; position: relative; top: -136px; left: 100px;"/>
+		<!--<img src="white.jpg" style="max-width: 100%; max-height: 100%; opacity: 0.8; position: relative; top: -136px; left: 100px;"/>-->
+		<img src="white.jpg" height="1300" width = "1300" style="opacity: 0.8; position: relative; top: -136px; left: 100px;"/>
 		</div> 
 		<div style="position: relative; top: 50px; left: 200px;">
 		<h1> Lost something? </h1>
-<form action ="Found.php" method = "POST">
+<form action ="Lost.php" method = "POST">
 	Name of Item*: <input type="text" name="itemname" value="<?php if (isset($_POST['itemname'])) echo $_POST['itemname'];?>")><br>
 	Location Item Lost: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")>
 		<?php require( 'includes/connect_limbo_db.php' ) ;
@@ -80,6 +81,10 @@ mysqli_close( $dbc ) ;
 </form>
 <!--showing after inputs -->
 <?php show_found_records($dbc);?>
+<?php if($_SERVER['REQUEST_METHOD'] == 'GET'){
+	if(isset($_GET['id']))
+		show_found_record($dbc, $_GET['id']);
+}?>
 </div>
 </body>
 </html>
