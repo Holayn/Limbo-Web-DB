@@ -81,7 +81,7 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 			<h1> Update Status of item: </h1>
 			<form action ="admin_found.php" method = "POST">
 				Id #*: <input type="text" name="f_id" value="<?php if (isset($_POST['f_id'])) echo $_POST['f_id'];?>")><br>
-				Status*: <input type="text" name="f_status" value="<?php if (isset($_POST['f_status'])) echo $_POST['f_status'];?>")><br>
+				Status*: <select name="f_status" value="<?php if (isset($_POST['f_status'])) echo $_POST['f_status'];?>")><option value="Found">Found</option><option value="Claimed">Claimed</option></select><br>
 				<input type = "submit" >
 			</form>
 		</div>

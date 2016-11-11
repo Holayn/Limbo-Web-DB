@@ -80,7 +80,7 @@
 			<!--Let user report lost if not on found stuff table-->
 		<div style="position: relative; bottom: 0px; left:0px;"> 
 			<form>
-				<button id="butlost" class="button" formaction="ReportLost.php">Click to Report a Lost</button>
+				<button id="butlost" class="button" formaction="ReportLost.php">Click to Report a Lost Item</button>
 			</form>
 		</div>	
 	</body>
