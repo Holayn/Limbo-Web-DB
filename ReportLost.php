@@ -14,7 +14,8 @@ require( 'includes/connect_limbo_db.php' ) ;
 require( 'includes/limbohelpers.php' ) ;
 # Check to make sure it is the first time user is visiting the page
 if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-	$ownername = "";
+	$owner_name = "";
+	$item_name = "";
 	$phone = "";
 	$email = "";
 	$name = "";
@@ -22,10 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 }
 # Check to make sure the form method is post
 if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
-    $ownername = $_POST['ownername']; 
+    $owner_name = $_POST['owner_name']; 
+    $item_name = $_POST['item_name']; 
 	$phone = $_POST['phone'];
-	$email = $_POST['email'];
-	$name = $_POST['name'];
     $description = $_POST['description'];
     $location = $_POST['location'];
 	$date = $_POST['date'];
@@ -38,17 +38,16 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 	$error = array();
 	
 	#Checks to see if name input is valid	
-	if (!valid_name($name)) 
-		$error[] = 'name';
+	if (!valid_name($owner_name)) 
+		$error[] = 'owner_name';
+	#Checks to see if item input is valid	
+	if (!valid_name($item_name)) 
+		$error[] = 'item_name';
 	#Checks to see if description input is valid
 	if(!valid_name($description))
 		$error[] = 'description';
 	if (!valid_name($phone)) 
 		$error[] = 'phone';
-	if (!valid_name($ownername)) 
-		$error[] = 'ownername';
-	if (!valid_name($email)) 
-		$error[] = 'email';
 	#Report the errors or success
 	if (!empty($error)){
 		echo 'Error! Please enter the ' ;
@@ -58,12 +57,11 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 	}
 	else { 
 		#Inserts inputs into table if all inputs are valid
-		$name = trim($name);
+		$owner_name = trim($owner_name);
 		$description = trim($description);
-		$ownername = trim($ownername);
+		$item_name = trim($item_name);
 		$phone = trim($phone);
-		$email = trim($email);
-		$result = insert_record_loststuff($dbc, $ownername, $phone, $email, $name, $description, $location, $date) ;
+		$result = insert_record_loststuff($dbc, $owner_name, $phone, $item_name,$description, $location, $date) ;
 		echo "Success! Thanks" ; 
 	}
 }
@@ -92,10 +90,9 @@ mysqli_close( $dbc ) ;
 				<div style="position: relative; top: 50px; left: 200px;">
 <h1> Report a Lost Item </h1>
 <form action ="ReportLost.php" method = "POST">
-	Your Name*: <input type="text" name="ownername" value="<?php if (isset($_POST['ownername'])) echo $_POST['ownername'];?>")><br>
+	Your Name*: <input type="text" name="owner_name" value="<?php if (isset($_POST['owner_name'])) echo $_POST['owner_name'];?>")><br>
 	Phone Number*: <input type="text" name="phone" value="<?php if (isset($_POST['phone'])) echo $_POST['phone'];?>")><br>
-	Email*: <input type="text" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>")><br>
-	Name of Item*: <input type="text" name="name" value="<?php if (isset($_POST['name'])) echo $_POST['name'];?>")><br>
+	Name of Item*: <input type="text" name="item_name" value="<?php if (isset($_POST['item_name'])) echo $_POST['item_name'];?>")><br>
 	Description of Item: <input type="text" name = "description" value="<?php if (isset($_POST['description'])) echo $_POST['description'];?>")><br>
 	<!--TODO: MAKE DROPDOWN STICKY-->
 	Location Item Was Lost: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")><?php 
