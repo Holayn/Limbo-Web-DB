@@ -90,6 +90,12 @@ nav a:hover {
 	left: 200px;
     padding: 15px 32px;
 }
+#butreportlost {
+	position: absolute;
+	top: 100px;
+	left: 200px;
+    padding: 15px 32px;
+}
 
 #butfound {
 	position: absolute;
