@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link href="ReportLost.css" type="text/css" rel="stylesheet">
 		<link href="home.css" type="text/css" rel="stylesheet">
 		<title>Report Lost</title>
 	</head>
@@ -74,23 +73,24 @@
 		?>
 			<!--page layout-->
 		<img src="maristlogo.png" id="maristlogo">
+		<div id="background"> </div>
 		<br><br>
-		<div style="position: absolute; left: 0; top: 150px;">
+		<div style="position: absolute; left: 0; top: 105; width: 100%">
 					<!--menu for navigation-->
-			<ul>
-				<li><a href="Home.html">Home</a></li>
-				<li><a href="Lost.php">Lost</a></li>
-				<li><a href="Found.php">Found</a></li>
-				<li><a href="admin_login.php">Admin</a></li>
-			</ul>
-			<img src="white.jpg" height="500" width="1350" style="opacity: 0.8; position: relative; top: -136px; left: 100px;"/>
-		</div> 
+			<nav>
+              <a href="Home.html">Home</a>
+              <a href="Lost.php">Lost</a>
+              <a href="Found.php">Found</a>
+              <a href="admin_login.php">Admin</a>
+            </nav>
+		<div class="box" style="opacity: 0.9">
+		
 			<!--Allow user to insert lost item-->
-		<div style="position: relative; top: 50px; left: 200px;">
+		<div style="position: relative; top: 0px; left:10px;">
 			<h1> Report a Lost Item </h1>
 			<form action ="ReportLost.php" method = "POST">
-				Your Name*: <input type="text" name="owner_name" value="<?php if (isset($_POST['owner_name'])) echo $_POST['owner_name'];?>")><br>
-				Phone Number*: <input type="text" name="phone" value="<?php if (isset($_POST['phone'])) echo $_POST['phone'];?>")><br>
+				<p class="para">Your Name*: <input type="text" name="owner_name" value="<?php if (isset($_POST['owner_name'])) echo $_POST['owner_name'];?>")><br>
+				Phone Number*: <input type="text" name="phone" value="<?php if (isset($_POST['phone_name'])) echo $_POST['phone_name'];?>")><br>
 				Name of Item*: <input type="text" name="item_name" value="<?php if (isset($_POST['item_name'])) echo $_POST['item_name'];?>")><br>
 				Description of Item: <input type="text" name = "description" value="<?php if (isset($_POST['description'])) echo $_POST['description'];?>")><br>
 				<!--TODO: MAKE DROPDOWN STICKY-->
@@ -104,10 +104,13 @@
 				Approx. Date Lost: <input type="date" name="date" value="<?php if (isset($_POST['date'])) echo $_POST['date'];?>")><br>
 				<!--TODO: SUBMIT PHOTO-->
 				<!--Additional Information: <input type="text" name="addinfo" value="<?php if (isset($_POST['addinfo'])) echo $_POST['addinfo'];?>")>-->
-				<input type = "submit" >
+				<input type = "submit">
+				</p>
 				<!--Show user table has been updated-->
 			<?php show_report_lost_records($dbc);?>
 			</form>
+			</div> 
+			</div>
 		</div>
 	</body>
 </html>

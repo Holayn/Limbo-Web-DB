@@ -60,8 +60,8 @@ function admin_show_found_records($dbc) {
 		{
 		  # But...wait until we know the query succeeded before
 		  # starting the table.
-		  echo '<H1> Manage Found Stuff</H1>' ;
-		  echo '<TABLE border=1 style = "font-family:courier;">';
+		  echo '<H1 style="margin-left: 0px; margin-top: 8px"> Manage Found Stuff</H1>' ;
+		  echo '<TABLE border=1 style = "font-family:courier; margin-top: -10px;">';
 		  echo '<TR>';
 		  echo '<TH>Id</TH>';
 		  echo '<TH>Finder Name</TH>';
@@ -117,8 +117,8 @@ function admin_show_lost_records($dbc) {
 		{
 		  # But...wait until we know the query succeeded before
 		  # starting the table.
-		  echo '<H1>Manage Lost Stuff</H1>' ;
-		  echo '<TABLE border=1 style = "font-family:courier;">';
+		  echo '<H1 style="margin-left: 0px; margin-top: 8px">Manage Lost Stuff</H1>' ;
+		  echo '<TABLE border=1 style = "font-family:courier; margin-top: -10px;">';
 		  echo '<TR>';
 		  echo '<TH>Id</TH>';
 		  echo '<TH>Name of Item</TH>';
@@ -221,8 +221,8 @@ function show_result_found_records($dbc, $name) {
 	{
 	  # But...wait until we know the query succeeded before
 	  # starting the table.
-	  echo '<H1>Here are found items that match your search:</H1>' ;
-	  echo '<TABLE border=1 style = "font-family:courier;">';
+	  echo '<H1 style="margin-left: 0px; margin-top: 80px">Here are found items that match your search:</H1>' ;
+	  echo '<TABLE border=1 style = "font-family:courier;margin-top: -10px;">';
 	  echo '<TR>';
 	  echo '<TH>Name of Item</TH>';
 	  echo '<TH>Location</TH>';
@@ -272,8 +272,8 @@ function show_initial_found_records($dbc) {
 	{
 	  # But...wait until we know the query succeeded before
 	  # starting the table.
-	  echo '<H1>Most Recent Found Stuff</H1>' ;
-	  echo '<TABLE border=1 style = "font-family:courier;">';
+	  echo '<H1 style="margin-left: 0px; margin-top: 80px">Most Recent Found Stuff</H1>' ;
+	  echo '<TABLE border=1 style = "font-family:courier;margin-top: 0px;">';
 	  echo '<TR>';
 	  echo '<TH>Name of Item</TH>';
 	  echo '<TH>Location</TH>';
@@ -322,8 +322,8 @@ function show_found_record($dbc, $id) {
 	{
 	  # But...wait until we know the query succeeded before
 	  # starting the table.
-	  echo '<H1>More Information:</H1>' ;
-	  echo '<TABLE border=1 style = "font-family:courier;">';
+	  echo '<H1 style="margin-left: 0px; margin-top: 15px">More Information:</H1>' ;
+	  echo '<TABLE border=1 style = "font-family:courier; margin-top: -10px;">';
 	  echo '<TR>';
 	  echo '<TH>Item Name</TH>';
 	  echo '<TH>Description</TH>';
@@ -374,8 +374,8 @@ function show_initial_lost_records($dbc) {
 	{
 	  # But...wait until we know the query succeeded before
 	  # starting the table.
-	  echo '<H1>Lost Stuff</H1>' ;
-	  echo '<TABLE border=1 style = "font-family:courier;">';
+	  echo '<H1 style="margin-left: 0px; margin-top: 8px">Lost Stuff</H1>' ;
+	  echo '<TABLE border=1 style = "font-family:courier;margin-top: -10px;">';
 	  echo '<TR>';
 	  echo '<TH>Name of Item</TH>';
 	  echo '<TH>Description</TH>';
@@ -427,7 +427,7 @@ function show_lost_records($dbc, $id) {
 	{
 	  # But...wait until we know the query succeeded before
 	  # starting the table.
-	  echo '<H1>Lost Stuff</H1>' ;
+	  echo '<H1>Lost Stuff More Info</H1>' ;
 	  echo '<TABLE border=1 style = "font-family:courier;">';
 	  echo '<TR>';
 	  echo '<TH>Name of Item</TH>';
@@ -478,8 +478,8 @@ function show_report_lost_records($dbc) {
 		{
 		  # But...wait until we know the query succeeded before
 		  # starting the table.
-		  echo '<H1>Lost Stuff</H1>' ;
-		  echo '<TABLE border=1 style = "font-family:courier;">';
+		  echo '<H1 style="margin-left: -10px; margin-top: 40px">Lost Stuff</H1>' ;
+		  echo '<TABLE border=1 style = "font-family:courier;margin-top: -20px; margin-left: -10px">';
 		  echo '<TR>';
 		  echo '<TH>Name of Item</TH>';
 		  echo '<TH>Description</TH>';
@@ -528,8 +528,8 @@ function show_report_found_records($dbc) {
 		{
 		  # But...wait until we know the query succeeded before
 		  # starting the table.
-		  echo '<H1>Found Stuff</H1>' ;
-		  echo '<TABLE border=1 style = "font-family:courier;">';
+		  echo '<H1 style="margin-left: 0px; margin-top: 30px">Found Stuff</H1>' ;
+		  echo '<TABLE border=1 style = "font-family:courier;margin-top: -10px;">';
 		  echo '<TR>';
 		  echo '<TH>Id</TH>';
 		  echo '<TH>Finder Name</TH>';

@@ -1,12 +1,3 @@
-#maristlogo{
-	height: 80px;
-	width: 400px;
-	position: relative;
-	left: 50px;
-}
-body{
-	background-image: url("dogebg.jpg");
-}
 #butlost{
 	position:absolute;
 	top: 100px;

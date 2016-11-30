@@ -8,25 +8,34 @@
 	</head>
 	<body>
 		<img src="maristlogo.png" id="maristlogo">
+        <div id="background"> </div>
 		<br><br>
 			<!--page layout-->
-		<div style="position: absolute; left: 0; top: 150px; width: 100%">
+		<div style="position: absolute; left: 0; top: 105px; width: 100%">
 				<!--menu for navigation-->
-			<ul>
-				<li><a href="Home.html">Home</a></li>
-				<li><a href="Lost.php">Lost</a></li>
-				<li><a href="Found.php">Found</a></li>
-				<li><a href="admin_login.php">Admin</a></li>
-			</ul>
-			<img src="white.jpg" height="1300" width = "1300" style="opacity: 0.8; position: relative; top: -136px; left: 100px;"/>
-		</div> 
+			<nav>
+              <a href="Home.html">Home</a>
+              <a href="Lost.php">Lost</a>
+              <a href="Found.php">Found</a>
+              <a href="admin_login.php">Admin</a>
+            </nav>
+
+        <div class="box" style="opacity: 0.9">
 				<!--Allow user to search for his/her lost item in found table-->
-		<div style="position: relative; top: 50px; left: 200px;">
+		<div style="position: relative; top: 0px; left: 0px;">
 			<h1> Lost something? </h1>
 			<form action ="Lost.php" method = "POST">
 				Name of Item*: <input type="text" name="itemname" value="<?php if (isset($_POST['itemname'])) echo $_POST['itemname'];?>")><br>
 				<input type = "submit">
 			</form>
+            
+            <div style="position: relative; top: -150px; right: 270px;"> 
+            <!--Let user report lost if not on found stuff table-->
+			<form>
+				<button id="butlost" class="button" formaction="ReportLost.php">Click to Report a Lost</button>
+			</form>
+            </div>
+            
 				<!--showing after inputs -->
 			<?php
 				# Connect to MySQL server and the database
@@ -76,12 +85,12 @@
 					show_found_record($dbc, $_GET['id']);
 				}
 			?>
+            
+            
 		</div>
-			<!--Let user report lost if not on found stuff table-->
-		<div style="position: relative; bottom: 0px; left:0px;"> 
-			<form>
-				<button id="butlost" class="button" formaction="ReportLost.php">Click to Report a Lost Item</button>
-			</form>
+			
+		
 		</div>	
+        </div> 
 	</body>
 </html>

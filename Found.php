@@ -63,22 +63,24 @@
 			# Close the connection
 			mysqli_close( $dbc ) ;
 		?>
-			<!--page layout-->
+<!--------------------------page layout---------------------------->
 		<img src="maristlogo.png" id="maristlogo">
+        <div id="background"> </div>
 		<br><br>
-		<div style="position: absolute; left: 0; top: 150px;">
+		<div style="position: absolute; left: 0; top: 105px;">
 				<!--menu for navigation-->
-			<ul>
-				<li><a href="Home.html">Home</a></li>
-				<li><a href="Lost.php">Lost</a></li>
-				<li><a href="Found.php">Found</a></li>
-				<li><a href="admin_login.php">Admin</a></li>
-			</ul>
-			<img src="white.jpg" height="500" width="1350" style="opacity: 0.8; position: relative; top: -136px; left: 100px;"/>
-		</div> 
-		<div style="position: relative; top: 50px; left: 200px;">
+			<nav style="margin-top:5px;">
+              <a href="Home.html">Home</a>
+              <a href="Lost.php">Lost</a>
+              <a href="Found.php">Found</a>
+              <a href="admin_login.php">Admin</a>
+            </nav>
+            <div class="box" style="opacity: 0.9"> 
+
+		 
 				<!--Show finder list of lost items first-->
 			<?php show_initial_lost_records($dbc);?>
+			
 			<?php 
 				if($_SERVER['REQUEST_METHOD'] == 'GET'){
 					if(isset($_GET['id']))
@@ -104,7 +106,10 @@
 				<input type = "submit" >
 			</form>
 				<!--Show user that table was updated-->
+                
 			<?php show_report_found_records($dbc); ?>
-		</div>
+            </div>
+        </div>
+
 	</body>
 </html>

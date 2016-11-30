@@ -41,21 +41,22 @@ RC  07-Nov-13   Created.
 	</head>
 	<body>
 		<img src="maristlogo.png" id="maristlogo">
+		<div id="background"> </div>
 		<br><br>
 			<!--page layout-->
 		<div style="position: relative; left: 0; top: 0;">
 				<!--menu for navigation-->
-			<ul>
-			  <li><a href="Home.html">Home</a></li>
-			  <li><a href="Lost.php">Lost</a></li>
-			  <li><a href="Found.php">Found</a></li>
-			  <li><a href="admin_login.php">Admin</a></li>
-			</ul>
-		<img src="white.jpg" height="500" width="1000" style="opacity: 0.8; position: relative; top: -136px; left: 100px;"/>
-		<img src="secret_doge.jpg" height="400" width="500" style="position: absolute; top: 50px; left: 500px;"/>
+			<nav>
+              <a href="Home.html">Home</a>
+              <a href="Lost.php">Lost</a>
+              <a href="Found.php">Found</a>
+              <a href="admin_login.php">Admin</a>
+            </nav>
+		<div class="box" style="opacity: 0.9">
+		<img src="secret_doge.jpg" height="400" width="500" style="position: absolute; top: 50px; left: 600px;"/>
 		</div>
 			<!--Login form for the admin-->
-		<div style="position: relative; bottom: 500px; left: 200px;"> 
+		<div style="position: relative; bottom: 400px; left: 200px;"> 
 			<h1>Admin login</h1>
 			<form action="admin_login.php" method="POST">
 				<table>
@@ -69,5 +70,6 @@ RC  07-Nov-13   Created.
 				<p><input type="submit" ></p>
 			</form>
 		</div>
+        </div>
 	</body>
 </html>

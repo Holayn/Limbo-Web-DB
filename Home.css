@@ -1,53 +1,106 @@
-#maristlogo{
-	height: 80px;
-	width: 400px;
+/*Div with class name box, the white box with opacity 0.9*/
+.box {
+	min-height: 500px; 
+    width: 78%;
+    padding: 10px;
+    padding-left: 20px;
+    background-color: white;
+    margin-left: 140px;
+    margin-top: -10px;
+    /*top right bottom left*/
+    border-radius: 5px 0px 5px 5px;
+    border-bottom-right-radius: 0px;
+}
+
+#centerh1 {
+    text-align: center;
+    margin-top: 0px;
+    display: block;
+    font-size: 40px;
+}
+
+/*Used for the background image so the image is fixed when scrolling*/
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('dogebg.jpg');
+    background-attachment: fixed;
+    background-size: 110%;
+    opacity: 0.6;
+}
+
+/*Navigation bar on the left side*/
+nav {
+    float:left;    
+    width: 100px;
+    height: 100%;
+    background-color: white;
+    overflow:auto;
+    clear: left;
+    opacity: 0.9;
+    margin-left: 40px;
+    margin-top: 10px;
+    
+} 
+
+nav a {
+    display: block;
+    color: black;
+    padding: 7px 0px 7px 0px;
+    /*top right bottom left*/
+    text-align: left;
+    text-decoration: none;
+    margin: 0px 0px 0px 10px;
+}
+
+/*Changes color when cursor is hovered over navigation bar*/
+nav a:hover {
+    background-color: #008CBA;
+    color: white;
+    padding: 7px 0px 7px 4px;
+}
+
+/*Marist Logo*/
+#maristlogo {
+	height: 70px;
+	width: 350px;
 	position: relative;
-	left: 50px;
+	left: 150px;
+    margin-top: 5px;
 }
-body{
-	background-image: url("dogebg.jpg");
+
+/*Button style properties*/
+.button {
+	background-color: #008CBA;
+	border: none;
+	color: white;
+	text-align: center;
+	font-size: 16px;
+    display: block;
+    margin-top: 70px;
+    margin-left: 70px;
 }
-#butlost{
-	position:absolute;
+
+#butlost {
+	position: absolute;
 	top: 100px;
 	left: 200px;
+    padding: 15px 32px;
 }
-#butfound{
+
+#butfound {
 	position: absolute;
 	top: 220px;
 	left: 200px;
+    padding: 15px 25px;
 }
+
 #butadmin{
 	position: absolute;
 	top: 340px;
 	left: 200px;
-}
-.button{
-	background-color: #008CBA;
-	border: none;
-	color: white;
-	padding: 15px 32px;
-	text-align: center;
-	font-size: 16px;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 100px;
-    background-color: #f1f1f1;
-}
-
-li a {
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-
-/* Change the link color on hover */
-li a:hover {
-    background-color: #008CBA;
-    color: white;
+    padding: 15px 45px;
 }

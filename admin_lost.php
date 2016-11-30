@@ -60,36 +60,37 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 		?>
 			<!--page layout-->
 		<img src="maristlogo.png" id="maristlogo">
+		<div id="background"> </div>
 		<br><br>	
 		<div style="position: relative; left: 0; top: 0;">
 				<!--menu for navigation-->
-			<ul>
-				<li><a href="Home.html">Home</a></li>
-				<li><a href="Lost.php">Lost</a></li>
-				<li><a href="Found.php">Found</a></li>
-				<li><a href="admin_login.php">Admin</a></li>
-			</ul>
-			<img src="white.jpg" height="500" width="1350" style="opacity: 0.8; position: relative; top: -136px; left: 100px;"/>
+			<nav>
+              <a href="Home.html">Home</a>
+              <a href="Lost.php">Lost</a>
+              <a href="Found.php">Found</a>
+              <a href="admin_login.php">Admin</a>
+            </nav>
 		</div>
 			<!--make updates to lost-->
-		<div style="position: relative; bottom: 600px; left: 200px;"> 
+		<div class="box" style="opacity: 0.9"> 
 			<?php 
 				#show lost table
 				admin_show_lost_records($dbc); 
 			?>
 			<br>
-			<h1> Update Status of item: </h1>
+			<h1 style="margin-top: 0px"> Update Status of item: </h1>
 			<form action ="admin_lost.php" method = "POST">
-				Id #*: <input type="text" name="l_id" value="<?php if (isset($_POST['l_id'])) echo $_POST['l_id'];?>")><br>
-				Status*: <select name="l_status" value="<?php if (isset($_POST['l_status'])) echo $_POST['l_status'];?>")><option value="Found">Found</option><option value="Claimed">Claimed</option></select><br>
-				<input type = "submit" >
+				<p class="para">Id #*: <input type="text" name="l_id" value="<?php if (isset($_POST['l_id'])) echo $_POST['l_id'];?>")><br>
+				Status*: <select name="l_status" value="<?php if (isset($_POST['l_status'])) echo $_POST['l_status'];?>")><option value="Found">Lost</option><option value="Claimed">Claimed</option></select><br>
+				<input type = "submit" ></p>
 			</form>
-		</div>	
+			</div>
 			<!-- allow admin to go back to task page-->
-		<div style="position: relative; bottom: 600px; left: 200px;"> 
+		<div style="position: relative; bottom: 240px; right: -650px;"> 
 			<form>
 				<button id="butlost" class="button" formaction="admin.html">Back to task page</button>
 			</form>
 		</div>
+
 	</body>
 </html>
