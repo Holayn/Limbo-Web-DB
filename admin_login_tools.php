@@ -40,7 +40,8 @@ RC	 7-Nov-13	Created.
 		
 	else {
 		# Make the query
-		$query = "SELECT first_name, pass FROM users WHERE first_name='" . $first_name . "' and pass='".$pass."'";
+		$SHApass = SHA1($pass);
+		$query = "SELECT first_name, pass FROM users WHERE first_name='" . $first_name . "' and pass='".$SHApass."'";
 		# shows query now for debugging purpose
 		# will remove for final project
 		show_query($query) ;
