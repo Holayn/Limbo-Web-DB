@@ -47,6 +47,55 @@ function show_records($dbc) {
 */
 
 #only for admin
+function admin_show_users($dbc){
+	require( 'includes/connect_limbo_db.php' );
+	$query = 'SELECT user_id, first_name, email FROM users';
+	$results = mysqli_query($dbc, $query);
+	if($results){
+		echo '<h1 style = "margin-left: 0px; margin-top: 8px"> Manage Users </h1>';
+		echo '<TABLE border=1 style = "font-family:courier; margin-top: -10px;">';
+		echo '<TR>';
+		echo '<TH>Id</TH>';
+		echo '<TH>First Name</TH>';
+		echo '<TH>Email</TH>';
+		echo '<TH>Delete</TH>';
+		echo '</TR>';
+		while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
+		{
+			$alink = '<a href = admin_users.php?id=' . $row['user_id'] . '>' . "Delete" . '</a>';
+			echo '<TR>' ;
+			echo '<TD>' . $row['user_id'] . '</TD>' ;
+			echo '<TD>' . $row['first_name'] . '</TD>' ;
+			echo '<TD>' . $row['email'] . '</TD>' ;
+			echo '<TD>' . $alink . '</TD>';
+			echo '</TR>';
+		}
+		echo '</TABLE>';
+		# Free up the results in memory
+		mysqli_free_result( $results ) ;
+	}
+	else
+	{
+		# If we get here, something has gone wrong
+		echo '<p>' . mysqli_error( $dbc ) . '</p>'  ;
+	}
+	# Close the connection
+	mysqli_close( $dbc ) ;
+}
+function update_password_users($dbc, $id, $password){
+	$query = "UPDATE users SET pass='" .$password."' WHERE user_id='".$id."'";
+	show_query($query);
+	$results = mysqli_query($dbc,$query) ;
+	check_results($results) ;
+	return $results ;
+}
+function admin_users_delete($dbc, $id){
+	$query = "DELETE FROM users WHERE user_id='".$id."'";
+	show_query($query);
+	$results = mysqli_query($dbc,$query) ;
+	check_results($results) ;
+	return $results ;
+}
 #found stuff as viewed by admin
 function admin_show_found_records($dbc) {
 		# Connect to MySQL server and the database
