@@ -47,6 +47,14 @@ function show_records($dbc) {
 */
 
 #only for admin
+function admin_add_user($dbc, $first_name, $email, $pass){
+	$SHApass = SHA1($pass);
+	$query = 'INSERT INTO users(first_name, email, pass) VALUES ("'.$first_name.'","'.$email.'","'.$SHApass.'")';
+	show_query($query);
+	$results = mysqli_query($dbc,$query);
+	check_results($results);
+	return $results;
+}
 function admin_show_users($dbc){
 	require( 'includes/connect_limbo_db.php' );
 	$query = 'SELECT user_id, first_name, email FROM users';
