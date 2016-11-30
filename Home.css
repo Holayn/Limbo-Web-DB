@@ -86,14 +86,27 @@ nav a:hover {
 
 #butlost {
 	position: absolute;
-	top: 100px;
+	top: 0px;
 	left: 200px;
     padding: 15px 32px;
 }
 
 #butfound {
 	position: absolute;
-	top: 220px;
+	top: 120px;
+	left: 200px;
+    padding: 15px 25px;
+}
+#butmanage {
+	position: absolute;
+	top: 240px;
+	left: 200px;
+    padding: 15px 32px;
+}
+
+#butadd {
+	position: absolute;
+	top: 360px;
 	left: 200px;
     padding: 15px 25px;
 }
