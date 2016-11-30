@@ -19,10 +19,10 @@ CREATE TABLE IF NOT EXISTS users (
 
 #Populate users table with user
 INSERT INTO users (first_name, email, pass)
-	VALUES ("admin", "jae.lee2@marist.edu" , "gaze11e"),
-		   ("Jon", "jon.snow@got.com" , "W1nt3r"),
-		   ("Snow", "snow.jon@got.com" , "1sc0m1ng");
-	
+	VALUES ("admin", "jae.lee2@marist.edu" , SHA1("gaze11e")),
+		   ("Jon", "jon.snow@got.com" , SHA1("W1nt3r")),
+		   ("Snow", "snow.jon@got.com" , SHA1("1sc0m1ng"));
+		   	
 #Create loststuff table
 CREATE TABLE IF NOT EXISTS loststuff (
 	id INT PRIMARY KEY AUTO_INCREMENT,
