@@ -269,8 +269,10 @@ function insert_record_loststuff($dbc, $owner_name, $phone, $item_name, $descrip
 function show_result_found_records($dbc, $name) {
 	# Connect to MySQL server and the database
 	require( 'includes/connect_limbo_db.php' ) ;
+	# Added keyword search
+	$keyword = '%' . $name . '%';
 	# Create a query to get all fields in foundstuff 
-	$query = 'SELECT id, item_name, location_name, found_date, status FROM foundstuff WHERE item_name = "'.$name.'"';
+	$query = 'SELECT id, item_name, location_name, found_date, status FROM foundstuff WHERE item_name LIKE "'.$keyword.'"';
 	# Execute the query
 	$results = mysqli_query( $dbc , $query ) ;
 	# Show results
