@@ -1,3 +1,4 @@
+<!--Created by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)-->
 <!DOCTYPE html>
 <html>
 	<head>
@@ -76,7 +77,6 @@
               <a href="admin_login.php">Admin</a>
             </nav>
             <div class="box" style="opacity: 0.9"> 
-
 		 
 				<!--Show finder list of lost items first-->
 			<?php show_initial_lost_records($dbc);?>

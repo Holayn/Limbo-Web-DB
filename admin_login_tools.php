@@ -4,6 +4,7 @@ Orginally created by Ron Coleman.
 History:
 Who	Date		Comment
 RC	 7-Nov-13	Created.
+Edited by Kai Wong, Jae Kyoung Lee (LJ), Wendy Ni
 -->
 <?php
 	# Includes these helper functions

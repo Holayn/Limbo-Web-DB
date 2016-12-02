@@ -1,3 +1,5 @@
+<!--Created by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)-->
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -69,15 +71,10 @@
 						show_result_found_records($dbc, $itemname);
 					}
 				} 
-				//If the user clicks on a link, the GET method will be returned, so run this else-if block to show the user more information about the president
-				/* else if($_SERVER['REQUEST_METHOD'] == 'GET'){
-					if(isset($_GET['id']))
-						show_found_record($dbc, $_GET['id']);
-				} */
 				# Close the connection
 				mysqli_close( $dbc ) ;
 			?>
-			<?php show_initial_found_records($dbc);?> <!-- edit this to show first few records...?-->
+			<?php show_initial_found_records($dbc);?>
 				<!--Display more info about item clicked-->
 			<?php 
 				if($_SERVER['REQUEST_METHOD'] == 'GET'){
@@ -85,11 +82,7 @@
 					show_found_record($dbc, $_GET['id']);
 				}
 			?>
-            
-            
-		</div>
-			
-		
+		</div>					
 		</div>	
         </div> 
 	</body>

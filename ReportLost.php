@@ -29,9 +29,6 @@
 				$description = $_POST['description'];
 				$location = $_POST['location'];
 				$date = $_POST['date'];
-				#TODO: SUBMIT PHOTO, ADD INFO
-				#$addinfo = $_POST['addinfo'];
-				#Display error message if user does not input required values
 				#Creating an error array to store the errors
 				$error = array();
 				#Checks to see if name input is valid	
@@ -93,7 +90,6 @@
 				Phone Number*: <input type="text" name="phone" value="<?php if (isset($_POST['phone_name'])) echo $_POST['phone_name'];?>")><br>
 				Name of Item*: <input type="text" name="item_name" value="<?php if (isset($_POST['item_name'])) echo $_POST['item_name'];?>")><br>
 				Description of Item: <input type="text" name = "description" value="<?php if (isset($_POST['description'])) echo $_POST['description'];?>")><br>
-				<!--TODO: MAKE DROPDOWN STICKY-->
 				Location Item Was Lost: <select name="location" value="<?php if (isset($_POST['location'])) echo $_POST['location'];?>")>
 					<?php 
 						require( 'includes/connect_limbo_db.php' ) ;
@@ -102,8 +98,6 @@
 					?>
 				</select><br><br>
 				Approx. Date Lost: <input type="date" name="date" value="<?php if (isset($_POST['date'])) echo $_POST['date'];?>")><br>
-				<!--TODO: SUBMIT PHOTO-->
-				<!--Additional Information: <input type="text" name="addinfo" value="<?php if (isset($_POST['addinfo'])) echo $_POST['addinfo'];?>")>-->
 				<input type = "submit">
 				</p>
 				<!--Show user table has been updated-->

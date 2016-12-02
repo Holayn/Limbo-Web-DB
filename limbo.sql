@@ -1,6 +1,6 @@
 #Create and populate a database for limbo
 #Authors: Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
-#Version 0.0.01 alpha   09/30/2016
+#Version 0.0.01 alpha 
 
 #Drop database if limbo already exists
 DROP DATABASE IF EXISTS limbo_db;

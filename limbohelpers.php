@@ -1,52 +1,9 @@
 <?php
-# Helpers.php 
 # Authors: Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
-# Date: 11/02/2016
 $debug = true;
-/* left for reference
-function show_records($dbc) {
-		# Connect to MySQL server and the database
-		require( 'includes/connect_limbo_db.php' ) ;
-		# Create a query to get the number, first name, and last name sorted by number in descending order
-		$query = 'SELECT number, fname, lname FROM stuff ORDER BY number DESC' ;
-		# Execute the query
-		$results = mysqli_query( $dbc , $query ) ;
-		# Show results
-		if( $results )
-		{
-		  # But...wait until we know the query succeeded before
-		  # starting the table.
-		  echo '<H1>Stuff</H1>' ;
-		  echo '<TABLE border=1 style = "font-family:courier;">';
-		  echo '<TR>';
-		  echo '<TH>Number</TH>';
-		  echo '<TH>First Name</TH>';
-		  echo '<TH>Last Name</TH>';
-		  echo '</TR>';
-		  # For each row result, generate a table row
-		  while ( $row = mysqli_fetch_array( $results , MYSQLI_ASSOC ) )
-		  {
-			echo '<TR>' ;
-			echo '<TD>' . $row['description'] . '</TD>' ;
-			echo '<TD>' . $row['finder_name'] . '</TD>' ;
-			echo '</TR>' ;
-		  }
-		  # End the table
-		  echo '</TABLE>';
-		  # Free up the results in memory
-		  mysqli_free_result( $results ) ;
-		}
-		else
-		{
-		  # If we get here, something has gone wrong
-		  echo '<p>' . mysqli_error( $dbc ) . '</p>'  ;
-		}
-		# Close the connection
-		mysqli_close( $dbc ) ;
-}
-*/
 
 #only for admin
+#add admin users
 function admin_add_user($dbc, $first_name, $email, $pass){
 	$SHApass = SHA1($pass);
 	$query = 'INSERT INTO users(first_name, email, pass) VALUES ("'.$first_name.'","'.$email.'","'.$SHApass.'")';
@@ -55,6 +12,7 @@ function admin_add_user($dbc, $first_name, $email, $pass){
 	check_results($results);
 	return $results;
 }
+#show admin users table
 function admin_show_users($dbc){
 	require( 'includes/connect_limbo_db.php' );
 	$query = 'SELECT user_id, first_name, email FROM users';
@@ -90,6 +48,7 @@ function admin_show_users($dbc){
 	# Close the connection
 	mysqli_close( $dbc ) ;
 }
+#update user's password
 function update_password_users($dbc, $id, $password){
 	$query = "UPDATE users SET pass='" .$password."' WHERE user_id='".$id."'";
 	show_query($query);
@@ -97,6 +56,7 @@ function update_password_users($dbc, $id, $password){
 	check_results($results) ;
 	return $results ;
 }
+#delete user
 function admin_users_delete($dbc, $id){
 	$query = "DELETE FROM users WHERE user_id='".$id."'";
 	show_query($query);
@@ -104,7 +64,7 @@ function admin_users_delete($dbc, $id){
 	check_results($results) ;
 	return $results ;
 }
-#found stuff as viewed by admin
+#found stuff table as viewed by admin
 function admin_show_found_records($dbc) {
 		# Connect to MySQL server and the database
 		require( 'includes/connect_limbo_db.php' ) ;
@@ -161,7 +121,7 @@ function admin_show_found_records($dbc) {
 		# Close the connection
 		mysqli_close( $dbc ) ;
 }
-#lost stuff as viewed by admin
+#lost stuff table as viewed by admin
 function admin_show_lost_records($dbc) {
 		# Connect to MySQL server and the database
 		require( 'includes/connect_limbo_db.php' ) ;
@@ -248,8 +208,7 @@ function update_status_loststuff($dbc, $id, $status) {
   check_results($results) ;
   return $results ;
 }
-
-# Inserts a record into the found table with number, first name, and last name
+# Inserts a record into the found table with first name, phone, email, item name, description, location, and date found
 function insert_record_foundstuff($dbc, $findername, $phone, $email, $itemname, $description, $location, $date) {
   $query = 'INSERT INTO foundstuff(finder_name, phone_number, email, item_name, description, location_name, found_date) VALUES ("' . $findername . '" , "' . $phone . '" , "' . $email . '" , "' . $description . '" , "' . $itemname . '", "' . $location . '", "' . $date . '" )' ;
   show_query($query);
@@ -257,6 +216,7 @@ function insert_record_foundstuff($dbc, $findername, $phone, $email, $itemname, 
   check_results($results) ;
   return $results ;
 }
+# Inserts a record into the lost table with first name, phone, item name, decription, location, and date found
 function insert_record_loststuff($dbc, $owner_name, $phone, $item_name, $description, $location, $date) {
   $query = 'INSERT INTO loststuff(owner_name, phone_number, item_name, description, location_name, lost_date) VALUES ("' . $owner_name . '" , "' . $phone . '" , "' . $description . '" , "' . $item_name . '", "' . $location . '", "' . $date . '")' ;
   show_query($query);
@@ -264,8 +224,7 @@ function insert_record_loststuff($dbc, $owner_name, $phone, $item_name, $descrip
   check_results($results) ;
   return $results ;
 }
-
-#show results that match what lost user searched for
+#show results that match what lost user searched for by name
 function show_result_found_records($dbc, $name) {
 	# Connect to MySQL server and the database
 	require( 'includes/connect_limbo_db.php' ) ;
@@ -318,7 +277,6 @@ function show_result_found_records($dbc, $name) {
 	mysqli_close( $dbc ) ;
 }
 #User view of found table
-#$dbc, $findername, $phone, $email, $itemname, $description, $location, $date, $status
 function show_initial_found_records($dbc) {
 	# Connect to MySQL server and the database
 	require( 'includes/connect_limbo_db.php' ) ;
@@ -523,7 +481,6 @@ function show_lost_records($dbc, $id) {
 	# Close the connection
 	mysqli_close( $dbc ) ;
 }
-
 #show user updated lost table
 function show_report_lost_records($dbc) {
 		# Connect to MySQL server and the database
@@ -635,7 +592,6 @@ function show_query($query) {
   if($debug)
     echo "<p>Query = $query</p>" ;
 }
-
 #This function populates the dropdown menu with locations
 function show_locations($dbc){
 	$query = "SELECT name FROM locations";
@@ -656,14 +612,12 @@ function show_locations($dbc){
 	# Close the connection
 	mysqli_close( $dbc ) ;
 }
-
 # Checks the query results as a debugging aid
 function check_results($results) {
   global $dbc;
   if($results != true)
     echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>'  ;
 }
-
 #Created function that validates a number
 function valid_number($num) {
 	if (empty($num) || !is_numeric($num))

@@ -1,3 +1,5 @@
+/*Created by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)*/
+
 /*Div with class name box, the white box with opacity 0.9*/
 .box {
 	min-height: 500px; 
@@ -12,6 +14,7 @@
     border-bottom-right-radius: 0px;
 }
 
+/*Centers the heading*/
 #centerh1 {
     text-align: center;
     margin-top: 0px;
@@ -103,6 +106,7 @@ nav a:hover {
 	left: 200px;
     padding: 15px 25px;
 }
+
 #abutmanage {
 	position: absolute;
 	top: 320px;
@@ -138,19 +142,20 @@ nav a:hover {
     padding: 15px 25px;
 }
 
-
 #backtaskl {
 	position: absolute;
 	top: 450px;
 	left: 100px;
     padding: 15px 25px;
 }
+
 #backtaskf {
 	position: absolute;
 	top: 380px;
 	left: 100px;
     padding: 15px 25px;
 }
+
 #backtaska {
 	position: absolute;
 	top: 450px;

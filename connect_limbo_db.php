@@ -1,4 +1,6 @@
 <?php 
+#By Kai Wong, Jae Kyoung Lee (LJ), Wendy Ni 
+
 # CONNECT TO MySQL DATABASE.
 
 

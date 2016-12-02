@@ -7,7 +7,6 @@ It demonstrates how to ...
   4) Update MySQL with form input.
 By Ron Coleman
 Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
-		11/02/2016
 -->
 <!DOCTYPE html>
 <html>

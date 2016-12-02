@@ -7,7 +7,6 @@ It demonstrates how to ...
   4) Update MySQL with form input.
 By Ron Coleman
 Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
-		11/02/2016
 -->
 <!DOCTYPE html>
 <html>
@@ -88,7 +87,5 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 				<button id="backtaskl" class="button" formaction="admin.html">Back to task page</button>
 			</form>
 			</div>
-
-
 	</body>
 </html>
