@@ -56,7 +56,7 @@ RC  07-Nov-13   Created.
 		<img src="secret_doge.jpg" height="400" width="500" style="position: absolute; top: 50px; left: 600px;"/>
 		</div>
 			<!--Login form for the admin-->
-		<div style="position: relative; bottom: 400px; left: 200px;"> 
+		<div style="position: relative; bottom: 350px; left: 250px;"> 
 			<h1>Admin login</h1>
 			<form action="admin_login.php" method="POST">
 				<table>

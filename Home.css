@@ -86,7 +86,7 @@ nav a:hover {
 
 #butlost {
 	position: absolute;
-	top: 0px;
+	top: 80px;
 	left: 200px;
     padding: 15px 32px;
 }
@@ -99,27 +99,61 @@ nav a:hover {
 
 #butfound {
 	position: absolute;
-	top: 120px;
+	top: 180px;
 	left: 200px;
     padding: 15px 25px;
 }
-#butmanage {
+#abutmanage {
 	position: absolute;
-	top: 240px;
+	top: 320px;
 	left: 200px;
     padding: 15px 32px;
 }
 
-#butadd {
+#abutadd {
 	position: absolute;
-	top: 360px;
+	top: 230px;
 	left: 200px;
     padding: 15px 25px;
 }
 
 #butadmin{
 	position: absolute;
-	top: 340px;
+	top: 280px;
 	left: 200px;
     padding: 15px 45px;
+}
+
+#abutlost {
+	position: absolute;
+	top: 50px;
+	left: 200px;
+    padding: 15px 32px;
+}
+
+#abutfound {
+	position: absolute;
+	top: 140px;
+	left: 200px;
+    padding: 15px 25px;
+}
+
+
+#backtaskl {
+	position: absolute;
+	top: 450px;
+	left: 100px;
+    padding: 15px 25px;
+}
+#backtaskf {
+	position: absolute;
+	top: 380px;
+	left: 100px;
+    padding: 15px 25px;
+}
+#backtaska {
+	position: absolute;
+	top: 450px;
+	left: 100px;
+    padding: 15px 25px;
 }

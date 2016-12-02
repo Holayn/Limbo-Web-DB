@@ -11,10 +11,8 @@ USE limbo_db;
 CREATE TABLE IF NOT EXISTS users (
 	user_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	first_name TEXT NOT NULL,
-	last_name TEXT NOT NULL,
 	email VARCHAR(40) UNIQUE NOT NULL,
-	pass TEXT NOT NULL,
-	reg_date DATETIME NOT NULL
+	pass TEXT NOT NULL
 );
 
 #Populate users table with user

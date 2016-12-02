@@ -13,8 +13,7 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link href="home.css" type="text/css" rel="stylesheet">
-		<link href="admin.css" type="text/css" rel="stylesheet">
+		<link href="Home.css" type="text/css" rel="stylesheet">
 		<title>Manage Found</title>
 	</head>
 	<body>
@@ -85,11 +84,9 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 				<input type = "submit" > </p>
 			</form>
 			<!-- allow admin to go back to task page-->
-		<div style="position: relative; bottom: 110px; right: -500px"> 
 			<form>
-				<button id="butlost" class="button" formaction="admin.html">Back to task page</button>
+				<button id="backtaskf" class="button" formaction="admin.html">Back to task page</button>
 			</form>
-			</div>
         </div>
 		</div>
 	</body>

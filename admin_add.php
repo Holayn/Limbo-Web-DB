@@ -13,8 +13,7 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link href="home.css" type="text/css" rel="stylesheet">
-		<link href="admin.css" type="text/css" rel="stylesheet">
+		<link href="Home.css" type="text/css" rel="stylesheet">
 		<title>Add Admin</title>
 	</head>
 	<body>
@@ -52,7 +51,7 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 		<img src="maristlogo.png" id="maristlogo">
 		<div id="background"> </div>
 		<br><br>
-		<div style="position: absolute; left: 0; top: 105;">
+		<div style="position: absolute; left: 8px; top: 100px;">
 				<!--menu for navigation-->
 			<nav>
               <a href="Home.html">Home</a>
@@ -60,10 +59,11 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
               <a href="Found.php">Found</a>
               <a href="admin_login.php">Admin</a>
             </nav>
+		</div>
 		<div class="box" style="opacity: 0.9">
 		<!--Allow admin to add new user-->
-		<div style="position: relative; top: 0px; left:10px;">
 			<h1> Add a New Admin </h1>
+			<img src="dogeadd.png" height="380" width="480" style="position: absolute; top: 150px; left: 600px;"/>
 			<form action ="admin_add.php" method = "POST">
 				<p class="para">First Name*: <input type="text" name="f_id" value="<?php if (isset($_POST['f_id'])) echo $_POST['f_id'];?>")><br>
 				Email*: <input type="text" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>")><br>
@@ -72,13 +72,9 @@ Edited by Kai Wong, Wendy Ni, Jae Kyoung Lee (LJ)
 				</p>
 			</form>
 			<!-- allow admin to go back to task page-->
-		<div style="position: relative; bottom: 110px; right: -500px"> 
 			<form>
-				<button id="butlost" class="button" formaction="admin.html">Back to task page</button>
+				<button id="backtaska" class="button" formaction="admin.html">Back to task page</button>
 			</form>
-			</div>
-			</div> 
-        </div>
 		</div>
 	</body>
 </html>
